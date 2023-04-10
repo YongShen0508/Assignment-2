@@ -41,7 +41,7 @@ int main()
 		{
 			break;
 		}
-		case(2)://f&d
+		case(2)://f&b
 		{
 			break;
 		}
