@@ -16,6 +16,8 @@ string upper(string);
 void Main_Menu(string);
 void CinemaManagement(int);
 void AdministratorMenu(int);
+void CustomerFeedback();
+
 //structure declaration
 struct mapping_seats
 {
@@ -24,6 +26,7 @@ struct mapping_seats
 	int row[50];
 	int column[50];
 }unavailable[50];
+
 //Main Menu
 int main()
 {
@@ -58,7 +61,12 @@ int main()
 			AdministratorMenu(5);
 			break;
 		}
-		case(6)://exit
+		case(6)://customer feedback
+		{
+			CustomerFeedback();
+			break;
+		}
+		case(7)://exit
 		{
 			decision = false;
 			break;
@@ -83,6 +91,38 @@ string upper(string uppercase)
 		uppercase[i] = toupper(uppercase[i]);
 	return uppercase;
 }
+
+//CustomerFeedback
+void CustomerFeedback ()
+{
+    system ("clear");
+    int rating;
+    char Continue = 'y';
+    string comment;
+    ofstream feedback;
+    feedback.open ("CustomerFeedback.txt" , ios::app);
+    
+    cout << "Good day! " << endl;
+    
+    do
+    {
+        cout << "\t\t\tPlease rate our cinema (1-5)" << endl << "\t\t\t";
+        cin >> rating;
+        feedback << rating << endl;
+        cin.ignore();
+        
+        cout << "\t\t\tPlease leave your feedback here. (in 100 words) " << endl << "\t\t\t";
+        getline (cin, comment);
+        feedback << comment << endl;
+        
+        cout << endl << "\t\t\tIf you want to leave new comment, press Y. " << endl << "\t\t\tIf no, press any other key to exit. " << endl << "\t\t\t";
+        cin >> Continue;
+        cout << endl;
+    } while (Continue == 'y' || Continue == 'Y');
+    
+    cout << endl << "\t\t\tThank you. " << endl;
+}
+
 //Administrator Menu (havent implement employee function)
 void AdministratorMenu(int option)
 {
