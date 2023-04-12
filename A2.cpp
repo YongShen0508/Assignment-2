@@ -102,33 +102,39 @@ void AdministratorMenu(int option)
 
 	system("cls");
 	do {
-		cout << "<1> Movie management" << endl;
-		cout << "<1> Food & Beverages management" << endl;
-		cout << "<1> Membership Management" << endl;
-		cout << "<1> Employee management" << endl;
+		cout << "<1> Cinema Refeshing"<<endl;
+		cout << "<2> Movie management" << endl;
+		cout << "<3> Food & Beverages management" << endl;
+		cout << "<4> Membership Management" << endl;
+		cout << "<5> Employee management" << endl;
+		cout << "<6> Exit" <<endl; 
 
 		cout << "\t\t\tPlease input your selection >>> ";
 		cin >> selection;
 		switch (selection)
 		{
-		case(1)://Movie management
+		case(1)://Cinema Refesh
+		{
+			
+			break;
+		}
+		case(2)://Cinema Management
 		{
 			CinemaManagement(selection);
 			break;
 		}
-		case(2)://F&B management
+		case(3)://Food & Beverages management
 		{
 			break;
 		}
-		case(3)://Membership management
+		case(4)://Membership management
 		{
 			break;
 		}
-		case(4)://edit hall spaces
+		case(5)://Employee Management
 		{
-			break;
 		}
-		case(5)://exit
+		case(6): //Exit
 		{
 			decision = false;
 			break;
