@@ -18,6 +18,9 @@ void CinemaManagement(int);
 void AdministratorMenu(int);
 void CustomerFeedback();
 
+void MovieManagement(int);
+void CinemaHallManagement(int);
+
 //structure declaration
 struct mapping_seats
 {
@@ -190,38 +193,30 @@ void AdministratorMenu(int option)
 //Cinema Management
 void CinemaManagement(int option)
 {
-	system("cls");
 	int selection;
 	bool decision = true;
 	do
 	{
-		cout << "<1> Add movies " << endl;
-		cout << "<2> Modify movies " << endl;
-		cout << "<3> Delete movies " << endl;
-		cout << "<4> Cinema Hall modification " << endl;
-		cout << "<5> Exit " << endl;
+		system("cls");
+		cout << "\n\n\n\t\t\t<1> Movies management " << endl;
+		cout << "\t\t\t<2> Cinema Hall modification " << endl;
+		cout << "\t\t\t<3> Exit " << endl;
 		cout << "\t\t\tPlease input your selection >>> ";
 		cin >> selection;
 		switch (selection)
 		{
-		case(1)://Add movie
+		case(1)://Movie management
 		{
-
+			MovieManagement(selection);
 			break;
 		}
-		case(2)://Modify Movie
+		
+		case(2)://Cinema Hall Modification
 		{
+			CinemaHallManagement(selection);
 			break;
 		}
-		case(3)://Delete Movie
-		{
-			break;
-		}
-		case(4)://Cinema Hall Modification
-		{
-			break;
-		}
-		case(5)://exit
+		case(3)://exit
 		{
 			decision = false;
 			break;
@@ -234,6 +229,93 @@ void CinemaManagement(int option)
 		}
 	} while (decision);
 }
+//Cinema Hall Management
+void CinemaHallManagement(int option)
+{
+	int selection;
+	bool decision = true;
+	do
+	{
+		system("cls");
+		int record = 0;
+		bool result = false;
+		ReadCinemaHallRecord(record);
+		cout << "\n\n\n" << string(100, char(61)) << "\n\n\n";
+		for (int w = 0; w < record; w++)
+		{
+			cout << "\n\n\t\t\t\t HALL " << unavailable[w].hall << "\n\n";
+			CinemaSeatPrinting(w);
+		}
+
+		cout << string(100, char(61)) << "\n\n\n";
+		cout << "\t\t\t<1> Add Cinema Hall" << endl;
+		cout << "\t\t\t<2> Modify Cinema Hall space" << endl;
+		cout << "\t\t\t<3> Delete Cinema Hall" << endl;
+		cout << "\t\t\t<4> Exit" << endl;
+		cout << "\t\t\tInput your selection >>> ";
+		cin >> selection;
+
+		switch (selection)
+		{
+		case(1)://Add cinema Hall
+		{
+			result = AddCinemaHall(result);
+			if (result)
+			{
+				record++;
+				unavailable[record - 1].hall = record;
+				unavailable[record - 1].data = 0;
+				unavailable[record - 1].row[0] = 0;
+				unavailable[record - 1].column[0] = 0;
+				LoadCinemaHallRecord(record);
+			}
+			break;
+		}
+		case(2)://Modify Cinema Seat
+		{
+			ModifyCinemaHall(record);
+			break;
+		}
+		case(3)://Delete Cinema Hall
+		{
+			DeleteCinemaHall(record);
+			break;
+		}
+		case(4)://exit
+		{
+			decision = false;
+			break;
+		}
+		default://reinput
+		{
+			cout << "\t\t\tInvalid input found" << endl;
+			break;
+		}
+		}
+	} while (decision);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
