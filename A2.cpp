@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <Windows.h>
 #include <string>
+#include <time.h>
 
 using namespace std;
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
