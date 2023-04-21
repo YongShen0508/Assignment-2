@@ -66,47 +66,24 @@ int main()
 		system("cls");
 		Main_Menu("MAIN");
 		cout << "\t\t\tPlease input your selection >>> ";
-		cin >> selection;
-		switch (selection)
-		{
-		case(1)://Movie details
-		{
-			break;
-		}
-		case(2)://f&b
-		{
-			break;
-		}
-		case(3)://purchase now
-		{
-			break;
-		}
-		case(4)://membership details
-		{
-			MembershipDetails();
-			break;
-		}
-		case(5)://administrator menu
-		{
+		getline(cin,selection);
+		if (selection == "1")//Movie details
+			MovieDetails(1);
+		else if (selection == "2")//f&b
+			cout << "HELLO" << endl;
+		else if(selection=="3")//purchase now
+			PurchaseNow(3);
+		else if(selection=="4")//membership details
+			cout << "HELLO" << endl;
+		else if(selection=="5")//administrator menu
 			AdministratorMenu(5);
-			break;
-		}
-		case(6)://customer feedback
-		{
+		else if(selection=="6")//customer feedback
 			CustomerFeedback();
-			break;
-		}
-		case(7)://exit
-		{
+		else if(selection=="7")//exit
 			decision = false;
-			break;
-		}
-		default://reinput
-		{
+		else
 			cout << "\t\t\tInvalid input found" << endl;
-			break;
-		}
-		}
+		cin.clear();
 	} while (decision);
 
 
