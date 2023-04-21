@@ -19,6 +19,7 @@ void CinemaManagement(int);
 void AdministratorMenu(int);
 //Customer Feedback (for user)
 void CustomerFeedback();
+void SearchFeedback(); //by rating
 void WriteFeedback();
 void ViewFeedback();
 void OpenCustomerFeedback(int&, double&);
@@ -47,8 +48,13 @@ struct MemberDetails
 }Member[100];
 struct PurchaseHistory
 {
-	string Purchase_user, Purchase_name, Purchase_password, Purchase_movie[5], Purchase_date[5], Purchase_pax[5], Purchase_food[5];
+	string Purchase_user, Purchase_name, Purchase_movie[5], Purchase_date[5], Purchase_pax[5], Purchase_food[5];
 }Purchase[100];
+struct Feedback
+{
+    int rating;
+    string comment;
+}feedback[100];
 
 //Main Menu
 int main()
@@ -116,6 +122,39 @@ string upper(string uppercase)
 }
 
 //CustomerFeedback
+void SearchFeedback()
+{
+    system("cls");
+    int nocomment = 0, rating, j = 0, found = 0;
+    double averagerating = 0;
+    OpenCustomerFeedback(nocomment, averagerating);
+    cout << "Enter rating to sort comment (1-5): ";
+    cin >> rating;
+    cout << endl << endl;
+    if (rating > 0 && rating < 6)
+    {
+        cout << "\t**************************************************************************" << endl << endl;
+        for (int i = 0; i < nocomment; i++)
+        {
+            if (rating == feedback[i].rating)
+            {
+                found = i;
+                cout << "\t\t\t" << ++j << ". Rating: " << feedback[i].rating << endl;
+                cout << "\t\t\tComment: " << feedback[i].comment << endl << endl;
+                cout << "\t**************************************************************************" << endl << endl;
+            }
+        }
+
+        if (!(rating == feedback[found].rating))
+        {
+            cout << "\t\t\tNo comment with rating of " << rating << ". " << endl << endl;
+            cout << "\t**************************************************************************" << endl << endl;
+        }
+    }
+    else
+        cout << "Invalid input! " << endl;
+    system("PAUSE");
+}
 void OpenCustomerFeedback(int& nocomment, double& averagerating)
 {
     ifstream CusFeedback;
@@ -142,19 +181,17 @@ void OpenCustomerFeedback(int& nocomment, double& averagerating)
     averagerating = double(totalrating) / nocomment;
     CusFeedback.close();
 }
-
 void ViewFeedback()
 {
     system("cls");
     int nocomment = 0, j = 0, totalrating = 0;
     double averagerating = 0;
     OpenCustomerFeedback(nocomment, averagerating);
-    cout << "Total comment: " << nocomment - 1 << endl;
+    cout << "Total comment: " << nocomment << endl;
     cout << "Average rating: " << fixed << setprecision(1) << averagerating << endl << endl;
     cout << "\t**************************************************************************" << endl << endl;
     for (int i = 0; i < nocomment; i++)
     {
-        totalrating += feedback[i].rating;
         cout << "\t\t\t" << ++j << ". Rating: " << feedback[i].rating << endl;
         cout << "\t\t\tComment: " << feedback[i].comment << endl << endl;
         cout << "\t**************************************************************************" << endl << endl;
@@ -192,7 +229,8 @@ void CustomerFeedback()
 		system("cls");
 		cout << "<1> Leave comment " << endl;
 		cout << "<2> View comment " << endl;
-		cout << "<3> Exit " << endl;
+        	cout << "<3> Search comment " << endl;
+		cout << "<4> Exit " << endl;
 		cout << "\t\t\tPlease input your selection >>> ";
 		cin >> selection;
 		switch (selection)
@@ -207,7 +245,12 @@ void CustomerFeedback()
 			ViewFeedback();
 			break;
 		}
-		case(3)://exit
+        	case(3)://search particular feedback using rating
+        	{
+            	SearchFeedback();
+            	break;
+        	}
+		case(4)://exit
 		{
 			decision = false;
 			break;
@@ -220,7 +263,6 @@ void CustomerFeedback()
 		}
 	} while (decision);
 }
-
 //Administrator Menu (havent implement employee function)
 void AdministratorMenu(int option)
 {
