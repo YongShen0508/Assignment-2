@@ -17,7 +17,11 @@ string upper(string);
 void Main_Menu(string);
 void CinemaManagement(int);
 void AdministratorMenu(int);
+//Customer Feedback (for user)
 void CustomerFeedback();
+void WriteFeedback();
+void ViewFeedback();
+void OpenCustomerFeedback(int&, double&);
 //open member info files
 void OpenMemberDetails(int&);
 void OpenPurchaseHistory();
@@ -112,34 +116,109 @@ string upper(string uppercase)
 }
 
 //CustomerFeedback
-void CustomerFeedback ()
+void OpenCustomerFeedback(int& nocomment, double& averagerating)
 {
-    system ("clear");
-    int rating;
-    char Continue = 'y';
-    string comment;
-    ofstream feedback;
-    feedback.open ("CustomerFeedback.txt" , ios::app);
-    
-    cout << "Good day! " << endl;
-    
-    do
+    ifstream CusFeedback;
+    int i = 0, totalrating = 0;
+
+    CusFeedback.open("CustomerFeedback.txt");
+    if (CusFeedback.is_open())
     {
-        cout << "\t\t\tPlease rate our cinema (1-5)" << endl << "\t\t\t";
-        cin >> rating;
-        feedback << rating << endl;
-        cin.ignore();
-        
-        cout << "\t\t\tPlease leave your feedback here. (in 100 words) " << endl << "\t\t\t";
-        getline (cin, comment);
-        feedback << comment << endl;
-        
-        cout << endl << "\t\t\tIf you want to leave new comment, press Y. " << endl << "\t\t\tIf no, press any other key to exit. " << endl << "\t\t\t";
-        cin >> Continue;
-        cout << endl;
-    } while (Continue == 'y' || Continue == 'Y');
-    
+        while (!CusFeedback.eof())
+        {
+            CusFeedback >> feedback[i].rating;
+            CusFeedback.ignore();
+            getline(CusFeedback, feedback[i].comment);
+            i++;
+            nocomment = i;
+        }
+    }
+    else
+        cout << "Please contact admin for further assistance..." << endl;
+    for (int i = 0; i < nocomment; i++)
+    {
+        totalrating += feedback[i].rating;
+    }
+    averagerating = double(totalrating) / nocomment;
+    CusFeedback.close();
+}
+
+void ViewFeedback()
+{
+    system("cls");
+    int nocomment = 0, j = 0, totalrating = 0;
+    double averagerating = 0;
+    OpenCustomerFeedback(nocomment, averagerating);
+    cout << "Total comment: " << nocomment - 1 << endl;
+    cout << "Average rating: " << fixed << setprecision(1) << averagerating << endl << endl;
+    cout << "\t**************************************************************************" << endl << endl;
+    for (int i = 0; i < nocomment; i++)
+    {
+        totalrating += feedback[i].rating;
+        cout << "\t\t\t" << ++j << ". Rating: " << feedback[i].rating << endl;
+        cout << "\t\t\tComment: " << feedback[i].comment << endl << endl;
+        cout << "\t**************************************************************************" << endl << endl;
+    }
+    system("PAUSE");
+}
+void WriteFeedback()
+{
+    system("cls");
+    char Continue = 'y';
+    int i = 0;
+    ofstream cusfeedback;
+    cusfeedback.open("CustomerFeedback.txt", ios::app);
+
+    cout << "Good day! \nThis comment is anonymous. \nPlease feel free to leave your thoughts. \n";
+
+    cout << "\t\t\tPlease rate our cinema (1-5)" << endl << "\t\t\t";
+    cin >> feedback[i].rating;
+    cusfeedback << endl << feedback[i].rating << endl;
+    cout << "\t\t\tPlease leave your feedback here. (in 100 words) " << endl << "\t\t\t";
+    cin.ignore();
+    getline(cin, feedback[i].comment);
+    cusfeedback << feedback[i].comment;
     cout << endl << "\t\t\tThank you. " << endl;
+    system("PAUSE");
+    cusfeedback.close();
+}
+void CustomerFeedback()
+{
+	system("cls");
+	int selection;
+	bool decision = true;
+	do
+	{
+		system("cls");
+		cout << "<1> Leave comment " << endl;
+		cout << "<2> View comment " << endl;
+		cout << "<3> Exit " << endl;
+		cout << "\t\t\tPlease input your selection >>> ";
+		cin >> selection;
+		switch (selection)
+		{
+		case(1)://allow customer to leave feedback (anonymous)
+		{
+			WriteFeedback();
+			break;
+		}
+		case(2)://to view others feedback
+		{
+			ViewFeedback();
+			break;
+		}
+		case(3)://exit
+		{
+			decision = false;
+			break;
+		}
+		default://reinput
+		{
+			cout << "\t\t\tInvalid input found" << endl;
+			break;
+		}
+		}
+	} while (decision);
 }
 
 //Administrator Menu (havent implement employee function)
