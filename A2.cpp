@@ -74,7 +74,7 @@ int main()
 		else if(selection=="3")//purchase now
 			PurchaseNow(3);
 		else if(selection=="4")//membership details
-			cout << "HELLO" << endl;
+			MembershipDetails();
 		else if(selection=="5")//administrator menu
 			AdministratorMenu(5);
 		else if(selection=="6")//customer feedback
@@ -270,7 +270,7 @@ void AdministratorMenu(int option)
 		cin >> selection;
 		switch (selection)
 		{
-		case(1)://Cinema Refesh
+		case(1)://Cinema Refresh
 		{
 			
 			break;
