@@ -418,32 +418,35 @@ void CinemaManagement(int option)
 //Cinema Hall Management
 void CinemaHallManagement(int option)
 {
-	int selection;
+	string selection;
 	bool decision = true;
 	do
 	{
 		system("cls");
 		int record = 0;
 		bool result = false;
+		for (int i = 0; i < 7; i++)
+		{
+			cout << "\t\t\t\t\t\t\t\t" << text[5][i] << endl;
+		}
 		ReadCinemaHallRecord(record);
-		cout << "\n\n\n" << string(100, char(61)) << "\n\n\n";
+		cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
 		for (int w = 0; w < record; w++)
 		{
 			cout << "\n\n\t\t\t\t HALL " << unavailable[w].hall << "\n\n";
-			CinemaSeatPrinting(w);
+			CinemaSeatPrinting(w,99);
 		}
-
-		cout << string(100, char(61)) << "\n\n\n";
+		cin.clear();
+		cout << "\t\t\t" << string(150, char(95)) << endl;
 		cout << "\t\t\t<1> Add Cinema Hall" << endl;
 		cout << "\t\t\t<2> Modify Cinema Hall space" << endl;
 		cout << "\t\t\t<3> Delete Cinema Hall" << endl;
 		cout << "\t\t\t<4> Exit" << endl;
+		cout << "\t\t\t" << string(150, char(95)) << endl;
 		cout << "\t\t\tInput your selection >>> ";
-		cin >> selection;
-
-		switch (selection)
-		{
-		case(1)://Add cinema Hall
+		getline(cin, selection);
+		//Add cinema Hall
+		if (selection == "1")
 		{
 			result = AddCinemaHall(result);
 			if (result)
@@ -455,31 +458,18 @@ void CinemaHallManagement(int option)
 				unavailable[record - 1].column[0] = 0;
 				LoadCinemaHallRecord(record);
 			}
-			break;
 		}
-		case(2)://Modify Cinema Seat
-		{
+		else if(selection=="2")//Modify Cinema Seat
 			ModifyCinemaHall(record);
-			break;
-		}
-		case(3)://Delete Cinema Hall
-		{
+		else if(selection=="3")//Delete Cinema Hall
 			DeleteCinemaHall(record);
-			break;
-		}
-		case(4)://exit
-		{
+		else if(selection=="4")//exit
 			decision = false;
-			break;
-		}
-		default://reinput
-		{
-			cout << "\t\t\tInvalid input found" << endl;
-			break;
-		}
-		}
+		else//reinput
+			cout << "\t\t\tInvalid input detected." << endl;
 	} while (decision);
 }
+
 //Open member info files
 void OpenPurchaseHistory()
 {
