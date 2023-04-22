@@ -32,10 +32,49 @@ void MembershipDetails();
 void UserLogIn();
 void UserRegister();
 void WriteMemberDetails(int&);
-
-void MovieManagement(int);
+//movie management
 void CinemaHallManagement(int);
-
+void ReadCinemaHallRecord(int&);
+void CinemaSeatPrinting(int,int);
+void HallSeatPrinting(int, int, int);
+bool AddCinemaHall(bool);
+void ModifyCinemaHall(int&);
+void DeleteCinemaHall(int&);
+void LoadCinemaHallRecord(int&);
+void AddCinemaSeat(int&);
+void DeleteCinemaSeat(int&);
+void ConfirmAddCinemaSeat(int, int, int);
+//movie function
+void MovieManagement(int);
+void AddMovie(int&);
+void ReadMovieRecord(int&);
+void LoadMovieRecord(int&);
+void ModifyMovie(int&);
+void DeleteMovie(int&);
+void MoviePrinting(int&,int);
+bool MovieStartDetection(string);
+void MovieEndDetection(string,int,double,int&,int&,int);
+void MovieIntoStruct(string, string, string, string, double, int,int&);
+//employee function
+void EmployeeManagement(int);
+void ReadEmployeeRecord(int&);
+void LoadEmployeeRecord(int&);
+void AddEmployee(int&);
+void DeleteEmployee(int&);
+void ModifyEmployee(int&);
+bool EmployeeID(string,int&);
+//Movie details
+void MovieDetails(int);
+//Purchase now
+void PurchaseNow(int);
+void BookMovie(int);
+void NumberTicket(int, int&, int&, int row[], int column[]);
+void MemberChecking(string&, int&);
+void TimeChecking(int, int, int, int, int, int,int&);
+void DateRecord(int, int, int, int, int, int,int&);
+void BookSeatPrinting(int, int, int);
+//refresh the cinema hall
+void CinemaRefresh(int);
 //fnb management
 void inventoryMenu(int); //menu with available stock 
 void addFB(); //function to add new fnb 
