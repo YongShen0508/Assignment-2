@@ -123,30 +123,29 @@ int main()
 {
 	system("chcp 65001");
 	bool decision = true;
-	do{
-		string selection;
+	do {
 		system("cls");
 		Main_Menu("MAIN");
 		cout << "\t\t\tPlease input your selection >>> ";
-		getline(cin,selection);
+		getline(cin, selection);
 		if (selection == "1")//Movie details
 			MovieDetails(1);
 		else if (selection == "2")//f&b
 			cout << "HELLO" << endl;
-		else if(selection=="3")//purchase now
+		else if (selection == "3")//purchase now
 			PurchaseNow(3);
-		else if(selection=="4")//membership details
-			cout << "HELLO" << endl;
-		else if(selection=="5")
+		else if (selection == "4")//membership details
+			MembershipDetails();
+		else if (selection == "5")
 			AdministratorMenu(5);
-		else if(selection=="7")//exit
+		else if (selection == "6")
+			CustomerFeedback();
+		else if (selection == "7")//exit
 			decision = false;
 		else
 			cout << "\t\t\tInvalid input found" << endl;
 		cin.clear();
 	} while (decision);
-
-
 	system("pause");
 	return 0;
 }
