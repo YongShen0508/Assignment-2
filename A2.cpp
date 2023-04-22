@@ -9,8 +9,9 @@
 #include <time.h>
 
 using namespace std;
+using namespace std;
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-
+SYSTEMTIME systemTime;
 
 //function declaration
 string upper(string);
