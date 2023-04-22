@@ -244,103 +244,91 @@ void CustomerFeedback()
 void AdministratorMenu(int option)
 {
 	//login menu
-	system("cls");
-	string admin_id, password;
 	bool decision = true, access = true;
-	int selection;
-	do
-	{
-		cout << "\n\n\n\t\t\tPlease input your ADMIN ID >>>";
-		cin >> admin_id;
-		cout << "\t\t\tPlease input your password >>>";
-		cin >> password;
-		access = false;
-	} while (access);
-
-	system("cls");
-	do {
-		cout << "<1> Cinema Refeshing"<<endl;
-		cout << "<2> Movie management" << endl;
-		cout << "<3> Food & Beverages management" << endl;
-		cout << "<4> Membership Management" << endl;
-		cout << "<5> Employee management" << endl;
-		cout << "<6> Exit" <<endl; 
-
-		cout << "\t\t\tPlease input your selection >>> ";
-		cin >> selection;
-		switch (selection)
-		{
-		case(1)://Cinema Refresh
-		{
-			
-			break;
-		}
-		case(2)://Cinema Management
-		{
-			CinemaManagement(selection);
-			break;
-		}
-		case(3)://Food & Beverages management
-		{
-			break;
-		}
-		case(4)://Membership management
-		{
-			break;
-		}
-		case(5)://Employee Management
-		{
-		}
-		case(6): //Exit
+	do{
+		cin.clear();
+		system("cls");
+		string id;
+		int record = 0,password,found=0;
+		ReadEmployeeRecord(record);
+		cout << "\n\n\n\n\n\n\n\n\n\t\t\tid=ew001 and password=12345 for lecturer used only!!"<<endl;
+		cout << "\n\t\t\tPlease input your ADMIN ID <E>xit >>";
+		cin >> id;
+		id = upper(id);
+		if (id == "E")
 		{
 			decision = false;
 			break;
 		}
-		default://reinput
-		{
+		cout << "\t\t\tPlease input your password >>>";
+		cin >> password;
+		if(id.length()==5)
+		{ 
+			for (int i = 0; i < record; i++)
+			{
+				if (password == employee[i].password && id == employee[i].id)
+				{
+					found++;
+				}
+			}
+		}
+		if (found == 0 || id.length()!=5){
+			cout << "\t\t\tPlease reinput your id and password " << endl;
+			Sleep(1000);
+		}
+		else if(found==1)
+			access = false;
+	} while (access);
+	do {
+		string selection;
+		system("cls");
+		cout << "\n\n\n" << endl;
+		cout << "\t\t\t<1> Cinema Refreshing" << endl;
+		cout << "\t\t\t<2> Cinema management" << endl;
+		cout << "\t\t\t<3> Food & Beverages management" << endl;
+		cout << "\t\t\t<4> Membership Management" << endl;
+		cout << "\t\t\t<5> Employee management" << endl;
+		cout << "\t\t\t<6> Exit " << endl;
+		cout << "\t\t\tPlease input your selection >>> ";
+		getline(cin, selection);
+		if (selection == "1")
+			CinemaRefresh(1);
+		if (selection == "2")//Cinema management
+			CinemaManagement(2);
+		if (selection == "3")//F&B management
+			cout << "Hello";
+		if (selection == "4")//Membership managements
+			cout << "hello" << endl;
+		if (selection == "5")//Employee management
+			EmployeeManagement(5);
+		if (selection == "6")
+			decision = false;
+		else//reinput
 			cout << "\t\t\tInvalid input found" << endl;
-			break;
-		}
-		}
 	} while (decision);
 }
 //Cinema Management
 void CinemaManagement(int option)
 {
-	int selection;
+	cin.clear();
+	string selection;
 	bool decision = true;
 	do
-	{
+	{	
 		system("cls");
 		cout << "\n\n\n\t\t\t<1> Movies management " << endl;
-		cout << "\t\t\t<2> Cinema Hall modification " << endl;
+		cout << "\t\t\t<2> Cinema Hall management " << endl;
 		cout << "\t\t\t<3> Exit " << endl;
 		cout << "\t\t\tPlease input your selection >>> ";
-		cin >> selection;
-		switch (selection)
-		{
-		case(1)://Movie management
-		{
-			MovieManagement(selection);
-			break;
-		}
-		
-		case(2)://Cinema Hall Modification
-		{
-			CinemaHallManagement(selection);
-			break;
-		}
-		case(3)://exit
-		{
+		getline(cin, selection);
+		if(selection=="1")//Movie management
+			MovieManagement(1);
+		if(selection=="2")//Cinema Hall Modification
+			CinemaHallManagement(2);
+		if(selection=="3")//exit
 			decision = false;
-			break;
-		}
-		default://reinput
-		{
+		else//reinput
 			cout << "\t\t\tInvalid input found" << endl;
-			break;
-		}
-		}
 	} while (decision);
 }
 //Cinema Hall Management
