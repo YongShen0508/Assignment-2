@@ -30,6 +30,7 @@ void OpenPurchaseHistory();
 void MembershipDetails();
 void UserLogIn();
 void UserRegister();
+void WriteMemberDetails(int&);
 
 void MovieManagement(int);
 void CinemaHallManagement(int);
@@ -542,7 +543,7 @@ void UserRegister()
 
 	Add_member.open("Admin_memberlist.txt", ios::app);
 	{
-		Add_member << Member[newmember].Details_user << endl;
+		Add_member << Member[newmember].Details_user << endl;;
 		Add_member << Member[newmember].Details_password << endl;
 		Add_member << Member[newmember].Details_name << endl;
 		Add_member << Member[newmember].Details_status << endl;
@@ -697,7 +698,6 @@ void MembershipDetails()
 		}
 	} while (decision);
 }
-
 
 void inventoryMenu(int option)
 {
