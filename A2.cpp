@@ -31,7 +31,18 @@ void OpenPurchaseHistory();
 void MembershipDetails();
 void UserLogIn();
 void UserRegister();
+//Membership management
 void WriteMemberDetails(int&);
+void WritePurchaseHistory(int&);
+void ViewMemberDetails(int&);
+void ViewPurchaseHistory(int&);
+void MembershipManagement();
+void Admin_MemberDetails();
+void Admin_PurchaseHistory();
+void Admin_SearchMember();
+void Admin_DeleteMember();
+void Admin_UpdateMember();
+void UpdatedMember(int&);
 //movie management
 void CinemaHallManagement(int);
 void ReadCinemaHallRecord(int&);
@@ -523,7 +534,7 @@ void OpenMemberDetails(int& nomember)
 	Ad_memberlist.close();
 }
 //Membership Details (for user)
-void UserRegister()
+void UserRegister() //add new member
 {
 	ofstream Add_member, Add_purchase;
 	int i = 0, newmember = 0, existing = 0, nomember = 0;
@@ -601,7 +612,7 @@ void UserRegister()
 	Add_purchase.close();
 }
 
-void UserLogIn()
+void UserLogIn() //for existing member
 {
 	int selection, nomember = 0;
 	bool decision = true;
@@ -728,6 +739,456 @@ void MembershipDetails()
 		}
 	} while (decision);
 }
+
+//Membership Management (Admin)
+void ViewMemberDetails(int& need)
+{
+	int nomember = 0;
+	cout << "\t**************************************************************************" << endl << endl;
+	cout << "\t\t\tUsername: " << Member[need].Details_user << endl;
+	cout << "\t\t\tPassword: " << Member[need].Details_password << endl;
+	cout << "\t\t\tName: " << Member[need].Details_name << endl;
+	cout << "\t\t\tStatus: " << Member[need].Details_status << endl;
+	cout << "\t\t\tJoin date: " << Member[need].Details_join << endl;
+	cout << "\t\t\tAccumulated point(s): " << Member[need].Details_point << endl;
+	cout << "\t\t\tPhone number: " << Member[need].Details_phone << endl;
+	cout << "\t\t\tEmail address: " << Member[need].Details_email << endl << endl;
+	cout << "\t**************************************************************************" << endl << endl;
+}
+void ViewPurchaseHistory(int& need)
+{
+	OpenPurchaseHistory();
+	cout << "\t**************************************************************************" << endl << endl;
+	cout << "\t\t\tUsername: " << Purchase[need].Purchase_user << endl;
+	cout << "\t\t\tName: " << Purchase[need].Purchase_name << endl << endl;
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[need].Purchase_date[i] << endl;
+		cout << "\t\t\tNumber of pax (Child Adult): " << Purchase[need].Purchase_pax[i] << endl;
+		cout << "\t\t\tMovie: " << Purchase[need].Purchase_movie[i] << endl;
+		cout << "\t\t\tF&B: " << Purchase[need].Purchase_food[i] << endl << endl;
+	}
+	cout << "\t**************************************************************************" << endl << endl;
+
+}
+void WritePurchaseHistory(int& nomember) //store updated info
+{
+	ofstream Ad_purchase;
+	Ad_purchase.open("Admin_purchase.txt");
+	for (int k = 0; k < nomember; k++)
+	{
+		Ad_purchase << Purchase[k].Purchase_user << endl;
+		Ad_purchase << Purchase[k].Purchase_name << endl;
+		for (int i = 0; i < 5; i++)
+		{
+			Ad_purchase << Purchase[k].Purchase_date[i] << endl;
+			Ad_purchase << Purchase[k].Purchase_pax[i] << endl;
+			Ad_purchase << Purchase[k].Purchase_movie[i] << endl;
+			Ad_purchase << Purchase[k].Purchase_food[i] << endl;
+		}
+	}
+	Ad_purchase.close();
+}
+void WriteMemberDetails(int& nomember) //store updated info
+{
+	ofstream Ad_memberlist;
+	Ad_memberlist.open("Admin_memberlist.txt");
+	for (int i = 0; i < nomember; i++)
+	{
+		Ad_memberlist << Member[i].Details_user << endl;
+		Ad_memberlist << Member[i].Details_password << endl;
+		Ad_memberlist << Member[i].Details_name << endl;
+		Ad_memberlist << Member[i].Details_status << endl;
+		Ad_memberlist << Member[i].Details_join << endl;
+		Ad_memberlist << Member[i].Details_point << endl;
+		Ad_memberlist << Member[i].Details_phone << endl;
+		Ad_memberlist << Member[i].Details_email;
+		if (i < (nomember-1))
+		{
+			Ad_memberlist << endl;
+		}
+	}
+	Ad_memberlist.close();
+}
+void UpdatedMember(int& update) //show updated info
+{
+	int nomember = 0;
+
+	system("cls");
+	cout << "\t\t\tUpdated Details " << endl << endl;
+	ViewMemberDetails(update);
+	system("PAUSE");
+}
+void Admin_DeleteMember() //delete expired member
+{
+	system("cls");
+	int nomember = 0, dlt = 0;
+	string username;
+	char choice = 'y';
+	OpenMemberDetails(nomember);
+	OpenPurchaseHistory();
+
+	cout << "Enter member's username: ";
+	cin.ignore();
+	getline(cin, username);
+	cout << endl << endl;
+	for (int i = 0; i < nomember; i++)
+	{
+		if (username == Member[i].Details_user)
+			dlt = i;
+	}
+	if (username == Member[dlt].Details_user)
+	{
+		ViewMemberDetails(dlt);
+		ViewPurchaseHistory(dlt);
+		cout << "\t\t\tDo you sure to remove this member? (Y/N): ";
+		cin >> choice;
+		if (toupper(choice) == toupper('y'))
+		{
+			cout << "\t\t\tMember deleted successfully. " << endl;
+			for (int i = dlt; i < nomember; i++)
+			{
+				Member[i].Details_user = Member[i + 1].Details_user;
+				Member[i].Details_password = Member[i + 1].Details_password;
+				Member[i].Details_name = Member[i + 1].Details_name;
+				Member[i].Details_status = Member[i + 1].Details_status;
+				Member[i].Details_join = Member[i + 1].Details_join;
+				Member[i].Details_point = Member[i + 1].Details_point;
+				Member[i].Details_phone = Member[i + 1].Details_phone;
+				Member[i].Details_email = Member[i + 1].Details_email;
+
+				Purchase[i].Purchase_user = Purchase[i + 1].Purchase_user;
+				Purchase[i].Purchase_name = Purchase[i + 1].Purchase_name;
+
+				for (int w = 0; w < 5; w++)
+				{
+					Purchase[i].Purchase_date[w] = Purchase[i + 1].Purchase_date[w];
+					Purchase[i].Purchase_pax[w] = Purchase[i + 1].Purchase_pax[w];
+					Purchase[i].Purchase_movie[w] = Purchase[i + 1].Purchase_movie[w];
+					Purchase[i].Purchase_food[w] = 	Purchase[i + 1].Purchase_food[w];
+				}
+			}
+			nomember = nomember - 1;
+		}
+	}
+	else
+		cout << "Member doesn't exist! " << endl;
+	WriteMemberDetails(nomember);
+	WritePurchaseHistory(nomember);
+	system("PAUSE");
+}
+void Admin_UpdateMember() //update specific info
+{
+	system("cls");
+	string search;
+	bool decision = true;
+	ifstream Ad_memberlist;
+	int i = 0, j = 0, nomember = 0, update = 0, selection;
+	OpenMemberDetails(nomember);
+	OpenPurchaseHistory();
+
+	cout << "Enter member's username: ";
+	cin.ignore();
+	getline(cin, search);
+	cout << endl << endl;
+
+	for (int j = 0; j < nomember; j++)
+	{
+		if (upper(search) == upper(Member[j].Details_user))
+			update = j;
+	}
+	if (upper(search) == upper(Member[update].Details_user))
+	{
+		do
+		{
+			system("cls");
+			cout << "<1> Name" << endl;
+			cout << "<2> Status " << endl;
+			cout << "<3> Username " << endl;
+			cout << "<4> Password " << endl;
+			cout << "<5> Join date " << endl;
+			cout << "<6> Phone number " << endl;
+			cout << "<7> Email address " << endl;
+			cout << "<8> Accumulated point " << endl;
+			cout << "<9> Exit " << endl;
+			cout << "\t\t\tPlease input your selection >>> ";
+			cin >> selection;
+			switch (selection)
+			{
+			case(1)://New name
+			{
+				system("cls");
+				cout << "\t\t\tCurrent name: " << Member[update].Details_name << endl;
+				cout << "\t\t\tEnter new name: ";
+				cin.ignore();
+				getline(cin, Member[update].Details_name);
+				Purchase[update].Purchase_name = Member[update].Details_name;
+				UpdatedMember(update);
+				break;
+			}
+			case(2)://New status
+			{
+				system("cls");
+				cout << "\t\t\tCurrent status: " << Member[update].Details_status << endl;
+				cout << "\t\t\tEnter new status: ";
+				cin.ignore();
+				getline(cin, Member[update].Details_status);
+				UpdatedMember(update);
+				break;
+			}
+			case(3)://New username
+			{
+				system("cls");
+				cout << "\t\t\tCurrent username: " << Member[update].Details_user << endl;
+				cout << "\t\t\tEnter new username: ";
+				cin.ignore();
+				getline(cin, Member[update].Details_user);
+				Purchase[update].Purchase_user = Member[update].Details_user;
+				UpdatedMember(update);
+				break;
+			}
+			case(4)://New password
+			{
+				system("cls");
+				cout << "\t\t\tCurrent password: " << Member[update].Details_password << endl;
+				cout << "\t\t\tEnter new password: ";
+				cin.ignore();
+				getline(cin, Member[update].Details_password);
+				UpdatedMember(update);
+				break;
+			}
+			case(5)://New join date
+			{
+				system("cls");
+				cout << "\t\t\tCurrent join date: " << Member[update].Details_join << endl;
+				cout << "\t\t\tEnter new join date: ";
+				cin.ignore();
+				getline(cin, Member[update].Details_join);
+				UpdatedMember(update);
+				break;
+			}
+			case(6)://New phone number
+			{
+				system("cls");
+				cout << "\t\t\tCurrent phone number: " << Member[update].Details_phone << endl;
+				cout << "\t\t\tEnter new phone number: ";
+				cin.ignore();
+				getline(cin, Member[update].Details_phone);
+				UpdatedMember(update);
+				break;
+			}
+			case(7)://New email address
+			{
+				system("cls");
+				cout << "\t\t\tCurrent email address: " << Member[update].Details_email << endl;
+				cout << "\t\t\tEnter new email address: ";
+				cin.ignore();
+				getline(cin, Member[update].Details_email);
+				UpdatedMember(update);
+				break;
+			}
+			case(8)://New accumulated point
+			{
+				system("cls");
+				cout << "\t\t\tCurrent accumulated point(s): " << Member[update].Details_point << endl;
+				cout << "\t\t\tEnter new accumulated point(s): ";
+				cin.ignore();
+				getline(cin, Member[update].Details_point);
+				UpdatedMember(update);
+				break;
+			}
+			case(9)://exit
+			{
+				decision = false;
+				break;
+			}
+			default://reinput
+			{
+				cout << "\t\t\tInvalid input found" << endl;
+				break;
+			}
+			}
+		} while (decision);
+		WriteMemberDetails(nomember);
+		WritePurchaseHistory(nomember);
+	}
+	else
+		cout << "Member doesn't exist! " << endl;
+	system("PAUSE");
+}
+void Admin_SearchMember() //search for specific member
+{
+	system("cls");
+	string search;
+	bool decision = true;
+	int i = 0, j = 0, nomember = 0, found = 0, selection;
+	OpenMemberDetails(nomember);
+	OpenPurchaseHistory();
+
+	cout << "Enter member's username: ";
+	cin.ignore();
+	getline(cin, search);
+	cout << endl << endl;
+
+	for (int j = 0; j < nomember; j++)
+	{
+		if (upper(search) == upper(Member[j].Details_user))
+			found = j;
+	}
+	if (upper(search) == upper(Member[found].Details_user))
+	{
+		do
+		{
+			system("cls");
+			cout << "<1> Member details " << endl;
+			cout << "<2> Member purchase history " << endl;
+			cout << "<3> Exit " << endl;
+			cout << "\t\t\tPlease input your selection >>> ";
+			cin >> selection;
+			switch (selection)
+			{
+			case(1)://Member personal info
+			{
+				system("cls");
+				ViewMemberDetails(found);
+				system("PAUSE");
+				break;
+			}
+			case(2)://Member Purchase history (Only store 5 latest history)
+			{
+				system("cls");
+				ViewPurchaseHistory(found);
+				system("PAUSE");
+				break;
+			}
+			case(3)://exit
+			{
+				decision = false;
+				break;
+			}
+			default://reinput
+			{
+				cout << "\t\t\tInvalid input found" << endl;
+				break;
+			}
+			}
+		} while (decision);
+	}
+	else if (!(upper(search) == upper(Member[found].Details_user)))
+		cout << "Member doesn't exist! " << endl;
+	system("PAUSE");
+}
+void Admin_PurchaseHistory() //Members' purchase history (Only store 5 latest history)
+{
+	system("cls");
+
+	ifstream Ad_purchase;
+	int j = 0, nomember = 0;
+	OpenMemberDetails(nomember);
+	OpenPurchaseHistory();
+
+	cout << "\t**************************************************************************" << endl << endl;
+
+	for (int j = 0; j < nomember; j++)
+	{
+		cout << "\t\t\tUsername: " << Purchase[j].Purchase_user << endl;
+		cout << "\t\t\tName: " << Purchase[j].Purchase_name << endl << endl;
+		for (int i = 0; i < 5; i++)
+		{
+			cout << "\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[j].Purchase_date[i] << endl;
+			cout << "\t\t\tNumber of pax (Child Adult): " << Purchase[j].Purchase_pax[i] << endl;
+			cout << "\t\t\tMovie: " << Purchase[j].Purchase_movie[i] << endl;
+			cout << "\t\t\tF&B: " << Purchase[j].Purchase_food[i] << endl << endl;
+		}
+		cout << "\t**************************************************************************" << endl << endl;
+	}
+
+	Ad_purchase.close();
+	system("PAUSE");
+}
+
+void Admin_MemberDetails() //All members' info
+{
+	system("cls");
+
+	int nomember = 0;
+	OpenMemberDetails(nomember);
+
+	cout << "\t**************************************************************************" << endl << endl;
+	for (int i = 0; i < nomember; i++)
+	{
+		cout << "\t\t\t" << i + 1 << ". Username: " << Member[i].Details_user << endl;
+		cout << "\t\t\tPassword: " << Member[i].Details_password << endl;
+		cout << "\t\t\tName: " << Member[i].Details_name << endl;
+		cout << "\t\t\tStatus: " << Member[i].Details_status << endl;
+		cout << "\t\t\tJoin date: " << Member[i].Details_join << endl;
+		cout << "\t\t\tAccumulated point(s): " << Member[i].Details_point << endl;
+		cout << "\t\t\tPhone number: " << Member[i].Details_phone << endl;
+		cout << "\t\t\tEmail address: " << Member[i].Details_email << endl << endl;
+		cout << "\t**************************************************************************" << endl << endl;
+	}
+
+	system("PAUSE");
+}
+
+void MembershipManagement()
+{
+	system("cls");
+	int selection;
+	bool decision = true;
+	do
+	{
+		system("cls");
+		cout << "<1> Member details " << endl;
+		cout << "<2> Member purchase history " << endl;
+		cout << "<3> Search member " << endl;
+		cout << "<4> Delete member " << endl;
+		cout << "<5> Update member " << endl;
+		cout << "<6> Exit " << endl;
+		cout << "\t\t\tPlease input your selection >>> ";
+		cin >> selection;
+		switch (selection)
+		{
+		case(1)://Member personal info
+		{
+			Admin_MemberDetails();
+			break;
+		}
+		case(2)://Member Purchase history (Only store 5 latest history)
+		{
+			Admin_PurchaseHistory();
+			break;
+		}
+		case(3)://Search for specific member info
+		{
+			Admin_SearchMember();
+			break;
+		}
+		case(4)://Delete member
+		{
+			Admin_DeleteMember();
+			break;
+		}
+		case(5)://Update member details
+		{
+			Admin_UpdateMember();
+			break;
+		}
+		case(6)://exit
+		{
+			decision = false;
+			break;
+		}
+		default://reinput
+		{
+			cout << "\t\t\tInvalid input found" << endl;
+			break;
+		}
+		}
+	} while (decision);
+}
+
+
 
 void inventoryMenu(int option)
 {
