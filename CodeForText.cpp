@@ -17,7 +17,7 @@ void ReadTextRecord(int);
 void ReadTextRecord(int record)
 {
 	ifstream infile;
-	infile.open("title.txt");
+	infile.open("Title.txt");
 	if (infile.fail())
 		cout << "unable to open the file" << endl;
 	else
