@@ -75,6 +75,8 @@ void DateRecord(int, int, int, int, int, int,int&);
 void BookSeatPrinting(int, int, int);
 //refresh the cinema hall
 void CinemaRefresh(int);
+//read ascii text
+void ReadTextRecord(int);
 //fnb management
 void inventoryMenu(int); //menu with available stock 
 void addFB(); //function to add new fnb 
