@@ -79,10 +79,10 @@ struct foodAndBeverage {
 //Main Menu
 int main()
 {
+	system("chcp 65001");
 	bool decision = true;
-	int selection;
-	do
-	{
+	do{
+		string selection;
 		system("cls");
 		Main_Menu("MAIN");
 		cout << "\t\t\tPlease input your selection >>> ";
@@ -90,15 +90,13 @@ int main()
 		if (selection == "1")//Movie details
 			MovieDetails(1);
 		else if (selection == "2")//f&b
-			purchaseFB();
+			cout << "HELLO" << endl;
 		else if(selection=="3")//purchase now
 			PurchaseNow(3);
 		else if(selection=="4")//membership details
-			MembershipDetails();
-		else if(selection=="5")//administrator menu
+			cout << "HELLO" << endl;
+		else if(selection=="5")
 			AdministratorMenu(5);
-		else if(selection=="6")//customer feedback
-			CustomerFeedback();
 		else if(selection=="7")//exit
 			decision = false;
 		else
@@ -110,6 +108,7 @@ int main()
 	system("pause");
 	return 0;
 }
+
 //change string to uppercase
 string upper(string uppercase)
 {
