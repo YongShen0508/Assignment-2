@@ -248,23 +248,39 @@ void AdministratorMenu(int option)
 	do{
 		cin.clear();
 		system("cls");
-		string id;
-		int record = 0,password,found=0;
+		ReadTextRecord(0);
+		cout << "\n\n" << endl;
+		for (int i = 0; i < 7; i++)
+		{
+			cout << "\t\t\t\t\t\t\t\t" << text[14][i] << endl;
+		}
+		cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+		cout << "\n\t\t\t\tDear Admin, kindly key in your Admin ID and password" << endl;
+		cout << "\n\t\t\t" << string(150, char(95)) << endl;
+		string id,pass_word;
+		int record = 0,password=0, found = 0,number=0;
 		ReadEmployeeRecord(record);
-		cout << "\n\n\n\n\n\n\n\n\n\t\t\tid=ew001 and password=12345 for lecturer used only!!"<<endl;
-		cout << "\n\t\t\tPlease input your ADMIN ID <E>xit >>";
-		cin >> id;
+		cout << "\n\n\t\t\t\tID=ew001 and password=12345 for lecturer used only!!" << endl;
+		cout << "\n\t\t\t\t\tADMIN ID <E>xit >>>";
+		getline(cin, id);
 		id = upper(id);
 		if (id == "E")
 		{
 			decision = false;
 			break;
 		}
-		cout << "\t\t\tPlease input your password >>>";
-		cin >> password;
-		if(id.length()==5)
-		{ 
-			for (int i = 0; i < record; i++)
+		cout << "\t\t\t\t\tPassword >>>";
+		getline(cin, pass_word);
+		for (int i = 0; i < pass_word.size(); i++)	//ensure pass_word only in numeric numbers
+		{
+			if (isdigit(pass_word[i]))
+				number++;
+		}
+		if (pass_word.size() == number)		//comparing
+			password = stoi(pass_word);	//string to integer
+		if (id.length() == 5)
+		{
+			for (int i = 0; i < record; i++)	//checking corrent password
 			{
 				if (password == employee[i].password && id == employee[i].id)
 				{
@@ -272,16 +288,23 @@ void AdministratorMenu(int option)
 				}
 			}
 		}
-		if (found == 0 || id.length()!=5){
+		if (found == 0 || id.length() != 5)
+		{
 			cout << "\t\t\tPlease reinput your id and password " << endl;
 			Sleep(1000);
 		}
-		else if(found==1)
+		else if (found == 1)
 			access = false;
 	} while (access);
-	do {
-		string selection;
+	while(decision)
+	{
 		system("cls");
+		ReadTextRecord(0);
+		for (int i = 0; i < 7; i++)
+		{
+			cout << "\t\t\t" << text[1][i] << endl;
+		}
+		string selection;
 		cout << "\n\n\n" << endl;
 		cout << "\t\t\t<1> Cinema Refreshing" << endl;
 		cout << "\t\t\t<2> Cinema management" << endl;
@@ -305,7 +328,7 @@ void AdministratorMenu(int option)
 			decision = false;
 		else//reinput
 			cout << "\t\t\tInvalid input found" << endl;
-	} while (decision);
+	} 
 }
 //Cinema Management
 void CinemaManagement(int option)
