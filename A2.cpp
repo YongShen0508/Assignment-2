@@ -43,7 +43,6 @@ void FBManagement(); //add new item, delete item, add and reduce stock
 //purchase fnb
 void purchaseFB(); //function to purchase fnb
 
-string upper(string);
 void ReadFBRecord(int&); //read txt file
 void LoadFBRecord(int&); //update txt file
 //structure declaration
@@ -989,12 +988,6 @@ void LoadFBRecord(int& record)
 	}
 }
 
-string upper(string uppercase)
-{
-	for (int i = 0; i < uppercase.size(); i++)
-		uppercase[i] = toupper(uppercase[i]);
-	return uppercase;
-}
 
 
 
