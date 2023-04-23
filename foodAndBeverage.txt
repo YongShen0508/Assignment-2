@@ -1,0 +1,60 @@
+F001
+Crunchy Caramel Popcorn
+18.8 23.8
+93
+F002
+Chocolate Popcorn
+17.8 22.8
+0
+F003
+Original Popcorn
+15.8 20.8
+87
+B001
+Pepsi
+5 8
+100
+B002
+100 Plus
+5 8
+99
+B003
+Mineral Water
+2 3
+98
+F004
+Hotdog
+7 9
+88
+F005
+Nugget
+8 10
+58
+F006
+Mashed Potato
+8.8 10.8
+85
+F007
+French Fries
+4.8 6.8
+74
+F008
+Butter Popcorn
+17.8 22.8
+44
+B004
+7 Up
+5 8
+56
+B005
+Sprite
+5 8
+100
+B006
+Orange Juice
+6 9
+87
+F009
+Fried Chicken 
+12.8 15.8
+80
