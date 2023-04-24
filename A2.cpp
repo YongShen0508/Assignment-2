@@ -544,30 +544,14 @@ void UserLogIn() //for existing member
 				case(1)://Check personal details
 				{
 					system("cls");
-					cout << "\t**************************************************************************" << endl << endl;
-					cout << "\t\t\tName: " << Member[found].Details_name << endl;
-					cout << "\t\t\tStatus: " << Member[found].Details_status << endl;
-					cout << "\t\t\tJoin date: " << Member[found].Details_join << endl;
-					cout << "\t\t\tAccumulated point(s): " << Member[found].Details_point << endl;
-					cout << "\t\t\tPhone number: " << Member[found].Details_phone << endl;
-					cout << "\t\t\tEmail address: " << Member[found].Details_email << endl << endl;
-					cout << "\t**************************************************************************" << endl << endl;
+					ViewMemberDetails(found)
 					system("PAUSE");
 					break;
 				}
 				case(2)://Check purchase history
 				{
 					system("cls");
-					cout << "\t**************************************************************************" << endl << endl;
-					cout << "\t\t\tName: " << Purchase[found].Purchase_name << endl << endl;
-					for (int i = 0; i < 5; i++)
-					{
-						cout << "\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[found].Purchase_date[i] << endl;
-						cout << "\t\t\tNumber of pax (Child Adult): " << Purchase[found].Purchase_pax[i] << endl;
-						cout << "\t\t\tMovie: " << Purchase[found].Purchase_movie[i] << endl;
-						cout << "\t\t\tF&B: " << Purchase[found].Purchase_food[i] << endl << endl;
-					}
-					cout << "\t**************************************************************************" << endl << endl;
+					ViewPurchaseHistory(found)
 					system("PAUSE");
 					break;
 				}
