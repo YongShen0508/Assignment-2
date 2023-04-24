@@ -1576,12 +1576,12 @@ void ModifyCinemaHall(int& record)
 		getline(cin, selection);
 		if(selection=="1")//	Add
 			AddCinemaSeat(record);
-		else if(selection=="4")//Delete
+		else if(selection=="2")//Delete
 			DeleteCinemaSeat(record);
 		else if(selection=="3")//Exit
 			decision = false;
 		else//reinput
-			cout << "\t\t\tInvalid input found" << endl;
+			cout << "\t\t\tInvalid input detected" << endl;
 	} while (decision);
 
 
@@ -1623,8 +1623,10 @@ void DeleteCinemaHall(int& record)
 		cout << "successfully deleted..." << endl;
 		LoadCinemaHallRecord(record);
 	}
-	else
+	else{
 		cout << "no cinema hall found" << endl;
+		Sleep(1000);
+	}
 }
 void AddCinemaSeat(int& record)
 {//add unavailable seats
