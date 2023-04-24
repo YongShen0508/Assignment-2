@@ -510,7 +510,7 @@ void UserLogIn() //for existing member
 	int selection, nomember = 0;
 	bool decision = true;
 	ifstream Ad_memberlist, Ad_purchase;
-	int j = 0, i = 0, k = 0, found = 0;
+	int i = 0, found = 0;
 	string username, password;
 	system("cls");
 	cout << "Good day! " << endl;
