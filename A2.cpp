@@ -304,7 +304,7 @@ void CustomerFeedback()
 		}
 	} while (decision);
 }
-//Administrator Menu (havent implement employee function)
+
 void AdministratorMenu(int option){
 	bool decision = true, access = true;
 	do{	//login menu
