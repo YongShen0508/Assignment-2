@@ -1586,26 +1586,19 @@ void ModifyCinemaHall(int& record)
 
 
 }
-void DeleteCinemaHall(int& record)
-{
+void DeleteCinemaHall(int& record){
 	int number;
 	cout << "Please input the cinema hall number >>>";
 	cin >> number;
 
-	if (number > 0 && number <= record)
-	{
-		for (int i = 0; i < record; i++)
-		{
-			if (unavailable[i].hall == number)
-			{
-				for (int j = i; j < record; j++)
-				{
+	if (number > 0 && number <= record){
+		for (int i = 0; i < record; i++){
+			if (unavailable[i].hall == number){
+				for (int j = i; j < record; j++){
 					unavailable[j].hall =j+1;
 					unavailable[j].data = unavailable[j + 1].data;
-					if (unavailable[j].data> 0)
-					{
-						for (int z = 0; z < unavailable[j].data; z++)
-						{
+					if (unavailable[j].data> 0){
+						for (int z = 0; z < unavailable[j].data; z++){
 							unavailable[j].row[z] = unavailable[j + 1].row[z];
 							unavailable[j].column[z] = unavailable[j + 1].column[z];
 						}
@@ -1628,15 +1621,14 @@ void DeleteCinemaHall(int& record)
 		Sleep(1000);
 	}
 }
-void AddCinemaSeat(int& record)
-{//add unavailable seats
+void AddCinemaSeat(int& record){//add unavailable seats
 	int number;
 	char continued;
 	cout << "\t\t\tInput the number of cinema hall >>>";
 	cin >> number;
 	if (number > 0 && number <= record){
 		bool decision = true;
-		cout << "\n\n" << string(100, char(61)) << "\n\n";
+		cout << "\n\n\t\t\t" << string(100, char(61)) << "\n\n";
 		cout << "\t\t\tCinema hall " << number << endl;
 		CinemaSeatPrinting(number - 1, 99);
 		do {
@@ -1679,15 +1671,13 @@ void AddCinemaSeat(int& record)
 	else
 		cout << "\t\t\tNo cinema hall found."<<endl;
 }
-void DeleteCinemaSeat(int& record)
-{
+void DeleteCinemaSeat(int& record){
 	int number;
 	cout << "\t\t\tPlease input the cinema hall number >>>";
 	cin >> number;
 
-	if (number > 0 && number <= record)
-	{
-		cout << "\n\n" << string(100, char(61)) << "\n\n";
+	if (number > 0 && number <= record){
+		cout << "\n\n\t\t\t" << string(100, char(61)) << "\n\n";
 		cout << "\t\t\tCinema hall " << number << endl;
 		CinemaSeatPrinting(number - 1, 99);
 		bool decision = true;
@@ -1699,32 +1689,26 @@ void DeleteCinemaSeat(int& record)
 			cout << "\t\t\tInput the column of the seat >> ";
 			cin >> column;
 			int found = 0;
-			for (int i = 0; i < unavailable[number - 1].data; i++)
-			{
-				if (row > 10 || column > 14)
-				{
+			for (int i = 0; i < unavailable[number - 1].data; i++){
+				if (row > 10 || column > 14){
 					cout << "\t\t\tplease ensure row and column within the range: 0 < row < 10 and 0 < column < 15" << endl;
 					break;
 				}
-				else if (unavailable[number - 1].row[i] == row && unavailable[number - 1].column[i] == column)
-				{
+				else if (unavailable[number - 1].row[i] == row && unavailable[number - 1].column[i] == column){
 					found++;
 					char confirms;
 					cout << "\t\t\tAre you confirm delete row " << row << " and " << "column " << column << " <Y>es <N>o  >>";
 					cin >> confirms;
 					confirms = toupper(confirms);					
-					if (confirms == 'Y')
-					{
-						for (int j = i; j < unavailable[number - 1].data; j++)
-						{
+					if (confirms == 'Y'){
+						for (int j = i; j < unavailable[number - 1].data; j++){
 							unavailable[number - 1].row[j] = unavailable[number - 1].row[j + 1];
 							unavailable[number - 1].column[j] = unavailable[number - 1].column[j + 1];
 						}
 						unavailable[number - 1].data -= 1;
 						LoadCinemaHallRecord(record);
 					}
-					else
-					{
+					else{
 						cout << "\t\t\tConfirmation Unsuccessful" << endl;
 						cout << "\t\t\tPlease reinput the row and column" << endl;
 					}
@@ -1741,30 +1725,29 @@ void DeleteCinemaSeat(int& record)
 				decision = false;
 		} while (decision);
 	}
-	else
+	else {
 		cout << "\t\t\tno cinema hall seat found" << endl;
+		Sleep(1000);
+	}
 }
 void ConfirmAddCinemaSeat(int number, int row, int column)
 {
 	char confirms;
-	cout << "Are you confirm add row " << row << " and " << "column " << column << " <Y>es <N>o  >>";
+	cout << "\t\t\tAre you confirm add row " << row << " and " << "column " << column << " <Y>es <N>o  >>";
 	cin >> confirms;
 	confirms = toupper(confirms);
-	if (confirms == 'Y')
-	{
-		cout << "confirmation successful" << endl;
+	if (confirms == 'Y'){
+		cout << "\t\t\tconfirmation successful" << endl;
 		unavailable[number - 1].data += 1;
 		unavailable[number - 1].row[unavailable[number - 1].data - 1] = row;
 		unavailable[number - 1].column[unavailable[number - 1].data - 1] = column;
-		cout << "succesfully added" << endl;
+		cout << "\t\t\tsuccesfully added" << endl;
 	}
-	else
-	{
-		cout << "Confirmation Unsuccessful" << endl;
-		cout << "Please reinput the row and column" << endl;
+	else{
+		cout << "\t\t\tConfirmation Unsuccessful" << endl;
+		cout << "\t\t\tPlease reinput the row and column" << endl;
 	}
 }
-
 void MovieManagement(int option)
 {
 	bool decision = true;
