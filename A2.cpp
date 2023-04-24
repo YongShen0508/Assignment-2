@@ -509,7 +509,6 @@ void UserLogIn() //for existing member
 {
 	int selection, nomember = 0;
 	bool decision = true;
-	ifstream Ad_memberlist, Ad_purchase;
 	int i = 0, found = 0;
 	string username, password;
 	system("cls");
