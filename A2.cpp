@@ -2911,6 +2911,11 @@ void LoadPurchaseHistory(int& nomember) {
 
 void MenuList()
 {
+	ReadTextRecord(0);
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t" << text[11][i] << endl;
+	}
 	ifstream infile;
 	infile.open("foodAndBeverage.txt");
 	int i = 0;
