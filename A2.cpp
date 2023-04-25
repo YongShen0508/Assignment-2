@@ -2127,43 +2127,37 @@ void ModifyMovie(int& record)
 			LoadMovieRecord(record);
 	} while (decision);
 }
-void DeleteMovie(int& record) 
+void DeleteMovie(int& record)
 {
-	int found=0,index;
+	int found = 0, index;
 	string movie_id, confirm = "w";
 	bool decision = true;
 	do {
 		cout << "\t\t\t\tInput the movie id you want to delete <E>xit >>>>";
 		cin >> movie_id;
 		movie_id = upper(movie_id);
-		if (!(movie_id == "E"))
-		{
-			for (int i = 0; i < record; i++)
-			{
-				if (movie_id == movie[i].movie_id)
-				{
+		if (!(movie_id == "E")) {
+			for (int i = 0; i < record; i++) {
+				if (movie_id == movie[i].movie_id) {
 					found++;
 					index = i;
 				}
 
 			}
-			if (found == 1)
-			{
+
+			if (found == 1) {
 				cout << "\t\t\t\tMovie ID found in system" << endl;
-				while (!(confirm == "Y" || confirm == "N"))
-				{
+				while (!(confirm == "Y" || confirm == "N")) {
 					cout << "\t\t\t\tFinal confirmation <Y>es <N>o >>>";
 					cin >> confirm;
 					confirm = upper(confirm);
 					if (!(confirm == "Y" || confirm == "N"))
 						cout << "\t\t\t\tInvalid input" << endl;
 				}
-				if (confirm == "Y")
-				{
+				if (confirm == "Y") {
 					cout << "\t\t\t\tLoading..." << endl;
 					Sleep(3500);
-					for (int j = index; j < record; j++)
-					{
+					for (int j = index; j < record; j++) {
 						movie[j].movie_id = movie[j + 1].movie_id;
 						movie[j].movie_name = movie[j + 1].movie_name;
 						movie[j].description = movie[j + 1].description;
@@ -2172,8 +2166,7 @@ void DeleteMovie(int& record)
 						movie[j].movie_hall = movie[j + 1].movie_hall;
 						movie[j].seats.data = movie[j + 1].seats.data;
 						if (movie[j].seats.data > 0) {
-							for (int z = 0; z < movie[j].seats.data; z++)
-							{
+							for (int z = 0; z < movie[j].seats.data; z++) {
 								movie[j].seats.purchased_row[z] = movie[j + 1].seats.purchased_row[z];
 								movie[j].seats.purchased_column[z] = movie[j + 1].seats.purchased_column[z];
 							}
@@ -2183,10 +2176,8 @@ void DeleteMovie(int& record)
 							movie[j].seats.purchased_column[0] = movie[j + 1].seats.purchased_column[0];
 						}
 						movie[j].backup.data = movie[j + 1].backup.data;
-						if (movie[j].backup.data > 0)
-						{
-							for (int z = 0; z < movie[j].backup.data; z++)
-							{
+						if (movie[j].backup.data > 0) {
+							for (int z = 0; z < movie[j].backup.data; z++) {
 								movie[j].backup.row[z] = movie[j + 1].backup.row[z];
 								movie[j].backup.column[z] = movie[j + 1].backup.column[z];
 							}
@@ -2199,33 +2190,26 @@ void DeleteMovie(int& record)
 						decision = false;
 						record--;
 						LoadMovieRecord(record);
-
 					}
 				}
-				else if (confirm == "N")
+				else if (confirm == "N") {
+					cout << "\t\t\tconfirmation unsuccessful" << endl;
 					decision = false;
+					Sleep(900);
+				}
 			}
-			else if (found == 0)
+			else if (found == 0) {
 				cout << "\t\t\tInvalid movie id" << endl;
+				decision = false;
+				Sleep(900);
+			}
 		}
-		else
+		else {
+			cout << "\t\t\tpending leaving to main page" << endl;
 			decision = false;
+			Sleep(900);
+		}
 	} while (decision);
-
-}
-void MoviePrinting(int& record,int w)
-{
-	for (int i = 0; i < record; i++)
-	{
-		cout << "\n\t\t\tNo. " << i + 1 << endl;
-		if (w == 99) //only print for admin
-			cout << "\t\t\tMovie Id: " << movie[i].movie_id << endl;
-		cout << "\t\t\tMovie Name: " << movie[i].movie_name << endl;
-		cout << "\t\t\tMovie Description: " << movie[i].description << endl;
-		cout << "\t\t\tMovie Time: " << movie[i].movie_time << endl;
-		cout << "\t\t\tMovie Length H.MM: " <<fixed<<setprecision(2)<< movie[i].movie_length << endl;
-		cout << "\t\t\tMovie Hall: " << movie[i].movie_hall << endl;
-	}
 }
 bool MovieStartDetection(string movie_time)   //detect start time of movie
 {													//sample output
