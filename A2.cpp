@@ -2814,15 +2814,17 @@ void BookMovie(int option)
 									cout << "\t\t\tAre you confirms with this booking <Y>es <N>o>>>";
 									getline(cin, final);
 									final = upper(final);
-									if (final == "Y" || final == "E") {
+									if (final == "Y") 
 										payment = false;
-									}
-									else if (final == "N"){
+									else if (final == "N") {
 										cout << "\t\t\tPayment declined" << endl;
 										payment = false;
 										confirms = false;
 										decision = false;
+										booking == "N";
 									}
+									else
+										cout << "\t\t\tInvalid input detected." << endl;
 								} while (payment);
 								if (final == "Y"){
 									double price_child, price_adult, total_price, points;
@@ -2932,7 +2934,7 @@ void NumberTicket(int index, int& child, int& adult,int row[],int column[]){
 					detected++;
 			}
 			for (int j = 0; j < movie[index].backup.data; j++){
-				if (rows == movie[index].backup.row[i]&&column[j] == movie[index].backup.column[i])
+				if (rows == movie[index].backup.row[i]&&columns == movie[index].backup.column[j])
 					detected++;
 			}
 			for (int i = 0; i < input; i++){
