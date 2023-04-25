@@ -2817,7 +2817,6 @@ void BookMovie(int option)
 									}
 								} while (payment);
 								if (final == "Y"){
-									system("cls");
 									double price_child, price_adult, total_price, points;
 									int nomember = 0, record = 0;
 									OpenMemberDetails(nomember);
@@ -2828,6 +2827,7 @@ void BookMovie(int option)
 									price_adult = adult * adult_price;
 									total_price = price_adult + price_child;
 									points = int(total_price);
+									system("cls");
 									cout << "\t\t\t" << string(60, char(32)) << " PAYMENT SUMMARY " << string(60, CHAR(32)) << endl;
 									cout << "\n\t\t\t" << string(150, char(95)) << endl;
 									cout << "\t\t\t" << setw(134) << systemTime.wDay << "/" << systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
@@ -3105,6 +3105,7 @@ void UpdateHistory(int& trace_member, int& number){
 		if (selected_date == "N/A") {//check if both are "N/A"
 			number = i;
 			tracked++;
+			break;
 		}
 	}
 	if (tracked == 0){
