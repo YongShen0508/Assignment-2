@@ -2763,7 +2763,7 @@ void BookMovie(int option)
 			string people[25] = {};
 			string booking="w";
 			while (confirms){
-				cout << "\t\t\tInput the showtime of the movie <E>xit >>>";
+				cout << "\t\t\tInput the showtime of the movie>>>";
 				getline(cin, movie_time);
 				for (int i = 0; i < movie_time.length(); i++) {
 					if (isdigit(movie_time[i]))
@@ -2790,17 +2790,16 @@ void BookMovie(int option)
 						}
 					}
 					if (result&&found>0){
-						string booking;
 						do {
+							string booking;
 							cin.clear();
 							index = noMovie[number];
-							number++;
 							cout << "\t\t\tMovie Name: " << movie[index].movie_name << endl;
 							cout << "\t\t\tMovie Description: " << movie[index].description << endl;
 							cout << "\t\t\tMovie Time: " << movie[index].movie_time << endl;
 							cout << "\t\t\tMovie Length H.MM: " << fixed << setprecision(2) << movie[index].movie_length << endl;
 							cout << "\t\t\tMovie Hall: " << movie[index].movie_hall << endl;
-							cout << "\t\t\tAre this movie you want to book <Y>es <N>o >> >";
+							cout << "\t\t\tAre this movie you want to book <Y>es <N>o <E>xit >> >";
 							getline(cin, booking);
 							booking = upper(booking);
 							string final;
@@ -2812,7 +2811,7 @@ void BookMovie(int option)
 								cin.ignore();
 								do {
 									cin.clear();
-									cout << "\t\t\tAre you confirms with this booking <Y>es <N>o <E>xit >>>";
+									cout << "\t\t\tAre you confirms with this booking <Y>es <N>o>>>";
 									getline(cin, final);
 									final = upper(final);
 									if (final == "Y" || final == "E") {
@@ -2892,6 +2891,7 @@ void BookMovie(int option)
 								}
 							}
 							else if (booking == "N"){
+								number++;
 								if (number == found){
 									cout << "\t\t\tNo other movie found. Back to movie page" << endl;
 									cout << "\t\t\t";
@@ -2903,6 +2903,8 @@ void BookMovie(int option)
 								cout << "\t\t\tInvalid input detected." << endl;
 						} while (booking == "N"||booking!="Y");
 					}
+					else
+						cout << "\t\t\tInvalid showtime detected..." << endl;
 				}
 			}
 		}
