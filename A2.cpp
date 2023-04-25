@@ -3304,8 +3304,6 @@ void purchaseFB(int option)
             price = FNB[choice - 1].large_price * quantity;
             unit_price[checker] = FNB[choice - 1].large_price;
         }
-
-
         foodname[checker] = FNB[choice - 1].foodname;
         total_quantity[checker] = quantity;
         total += price;
@@ -3319,6 +3317,7 @@ void purchaseFB(int option)
         checker++;
     } while (upper(cont) == "Y");
     cin.ignore();
+    system("cls");
     OpenMemberDetails(nomember);
     MemberChecking(checking, nomember);
     cout << "\t\t\t" << string(60, char(32)) << " PAYMENT SUMMARY " << string(60, char(32)) << endl;
@@ -3343,6 +3342,8 @@ void purchaseFB(int option)
     cout << fixed << setprecision(0) << endl;
     if (!(checking == "9999" || checking == "9998"))
         cout << "\t\t\t\tTotal point \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << point << endl;
+    cout << "\t\t\t" << string(150, char(95)) << endl;
+    cout << "\t\t\t" << string(60, char(32)) << " END OF PAGE " << string(60, CHAR(32)) << endl;
     cout << "\t\t\t" << string(150, char(95)) << endl;
     system("pause");
     if (!(checking == "9999" || checking == "9998"))
