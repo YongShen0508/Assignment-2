@@ -93,7 +93,7 @@ void deleteFB(int); //function to delete existing fnb
 void inventoryFB(int); //function to add stock or delete stock
 void FBManagement(); //add new item, delete item, add and reduce stock
 //purchase fnb
-void purchaseFB(); //function to purchase fnb
+void purchaseFB(int); //function to purchase fnb
 
 void ReadFBRecord(int&); //read txt file
 void LoadFBRecord(int&); //update txt file
@@ -3213,7 +3213,7 @@ void LoadFBRecord(int& fbrecord)
 }
 
 
-void purchaseFB(int& point)
+void purchaseFB(int option)
 {
     ReadTextRecord(0);
     for (int i = 0; i < 7; i++)
@@ -3237,9 +3237,9 @@ void purchaseFB(int& point)
     int choice, size, time_validate = 0, date = 0, month = 0, year = 0, dd, mm, yyyy;
     string currentdate;
     double price, total = 0;
-    int quantity;
+    int quantity,point;
     bool correct = 0, validated;
-    char cont;
+    string cont;
     string foodname[30] = {};
     int total_quantity[30] = {};
     double unit_price[30] = {};
@@ -3317,7 +3317,7 @@ void purchaseFB(int& point)
         cout << "\t\t\tDo you want to add another F&B? <Y> to continue...";
         cin >> cont;
         checker++;
-    } while (toupper(cont) == 'Y');
+    } while (upper(cont) == "Y");
     cin.ignore();
     OpenMemberDetails(nomember);
     MemberChecking(checking, nomember);
