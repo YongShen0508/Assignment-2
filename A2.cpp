@@ -154,7 +154,7 @@ int main() {
 		if (selection == "1")//Movie details
 			MovieDetails(1);
 		else if (selection == "2")//f&b
-			cout << "HELLO" << endl;
+			MenuList();
 		else if (selection == "3")//purchase now
 			PurchaseNow(3);
 		else if (selection == "4")//membership details
