@@ -98,6 +98,7 @@ void FBManagement(); //add new item, delete item, add and reduce stock
 //purchase fnb
 void purchaseFB(int); //function to purchase fnb
 
+void MenuList();
 void ReadFBRecord(int&); //read txt file
 void LoadFBRecord(int&); //update txt file
 //structure declaration
@@ -2908,6 +2909,35 @@ void LoadPurchaseHistory(int& nomember) {
 	outfile.close();
 }
 
+void MenuList()
+{
+	ifstream infile;
+	infile.open("foodAndBeverage.txt");
+	int i = 0;
+
+	if (infile.is_open())
+	{
+		cout <<right<< setw(55) << "Regular (RM)" << "\t\t" << "Large (RM)" << endl;
+		while (!infile.eof())
+		{
+			getline(infile, FNB[i].foodcode);
+			getline(infile, FNB[i].foodname);
+			infile >> FNB[i].regular_price >> FNB[i].large_price;
+			infile.ignore();
+			infile >> FNB[i].stock;
+			infile.ignore();
+			cout << showpoint << fixed << setprecision(2);
+			cout << setw(10) << FNB[i].foodcode << setw(30) << FNB[i].foodname << "\t" << setw(10) << FNB[i].regular_price << "\t\t" << setw(8) << FNB[i].large_price << endl;
+			i++;
+		}
+		infile.close();
+	}
+	else
+	{
+		cout << "\t\t\tPlease contact Cinema Admin for further assistance...";
+
+	}
+}
 
 void inventoryMenu(int option)
 {
