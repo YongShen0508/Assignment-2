@@ -2963,3 +2963,413 @@ void Main_Menu(string Name)
 
 }
 
+void inventoryMenu(int option)
+{
+    ReadTextRecord(0);
+    for (int i = 0; i < 7; i++)
+    {
+        cout << "\t\t\t\t\t\t\t\t" << text[9][i] << endl;
+    }
+    cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+    int fbrecord = 0;
+    ReadFBRecord(fbrecord);
+    cout << "\t\t\t" << right << setw(55) << "Regular (RM)" << "\t\t" << "Large (RM)" << "\t\t" << "Available Stock" << endl;
+    for (int i = 0; i < fbrecord; i++)
+    {
+        cout << showpoint << fixed << setprecision(2);
+        cout << "\t\t\t" << setw(10) << FNB[i].foodcode << setw(30) << FNB[i].foodname << "\t" << setw(10) << FNB[i].regular_price << "\t\t" << setw(8) << FNB[i].large_price << setw(10) << FNB[i].stock << endl;
+    }
+}
+
+void addFB()
+{
+
+    char more = 'N';
+    int i = 0;
+    ofstream outfile;
+    outfile.open("foodAndBeverage.txt", ios::app);
+    if (outfile.is_open())
+    {
+        inventoryMenu(0);
+        do {
+            cout << right << setw(15);
+            cout << " Code: ";
+            cin.ignore();
+            getline(cin, FNB[i].foodcode);
+            cout << right << setw(15) << "Food Name: ";
+            getline(cin, FNB[i].foodname);
+            cout << right << setw(15) << "Regular Price: ";
+            cin >> FNB[i].regular_price;
+            cout << right << setw(15) << "Large Price: ";
+            cin >> FNB[i].large_price;
+            cout << right << setw(15) << "Available stock: ";
+            cin >> FNB[i].stock;
+            outfile << showpoint << fixed << setprecision(2);
+            outfile << endl;
+            outfile << FNB[i].foodcode << endl;
+            outfile << FNB[i].foodname << endl;
+            outfile << FNB[i].regular_price << " " << FNB[i].large_price << endl;
+            outfile << FNB[i].stock;
+            cout << "\t\t\tDo you wish to add more? Enter 'Y' to add more...";
+            cin >> more;
+        } while (toupper(more) == 'Y');
+
+        outfile.close();
+        inventoryMenu(0);
+    }
+    else
+    {
+        cout << "\t\t\t\033[1;31mProblem occur!!! Please contact cinema admin for further assistance...\033[0m" << endl;
+    }
+
+
+
+}
+
+
+void deleteFB(int option)
+{
+    bool found = true;
+    int fbrecord = 0, detect = 0;
+    do {
+        string keyword;
+        ReadFBRecord(fbrecord);
+        system("cls");
+        inventoryMenu(0);
+        cout << "\t\t\tFood Code: ";
+        cin >> keyword;
+        keyword = upper(keyword);
+        for (int i = 0; i < fbrecord; i++)
+        {
+            if (keyword == FNB[i].foodcode)
+            {
+                detect++;
+                for (int j = i; j < fbrecord; j++)
+                {
+                    FNB[j].foodcode = FNB[j + 1].foodcode;
+                    FNB[j].foodname = FNB[j + 1].foodname;
+                    FNB[j].regular_price = FNB[j + 1].regular_price;
+                    FNB[j].large_price = FNB[j + 1].large_price;
+                    FNB[j].stock = FNB[j + 1].stock;
+                }
+                fbrecord--;
+            }
+        }
+        if (detect == 0)
+            cout << "\t\t\t\033[1;31mInvalid Food Code found!!!\033[0m" << endl;
+        else
+            found = false;
+        LoadFBRecord(fbrecord);
+    } while (found);
+
+    inventoryMenu(0);
+}
+
+void inventoryFB(int option)
+{
+    ReadTextRecord(0);
+    for (int i = 0; i < 7; i++)
+    {
+        cout << "\t\t\t\t\t\t\t\t" << text[8][i] << endl;
+    }
+    cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+    int fbrecord = 0;
+    ReadFBRecord(fbrecord);
+    //let users to select whether to add or delete stock
+    string keyword, line;
+    int action, quantity, i = 0, size, index;
+    bool decision = true, found = 0;
+    do {
+        system("cls");
+        inventoryMenu(0);
+        cout << "\n\n\n\t\t\t<1> Add Stock " << endl;
+        cout << "\t\t\t<2> Reduce Stock " << endl;
+        cout << "\t\t\t<3> Exit" << endl;
+        cout << "\t\t\tEnter your action: ";
+        cin >> action;
+        if (action == 1 || action == 2)
+        {
+            cout << "\t\t\tFood Code: ";
+            cin >> keyword;
+            keyword = upper(keyword);
+            size = keyword.length();
+            for (int i = 0; i < fbrecord; i++)
+            {
+                if (keyword == FNB[i].foodcode)
+                    index = i;//record the location of code
+            }
+            if (size == 4 && keyword == FNB[index].foodcode)
+            {
+                cout << "\t\t\tQuantity: ";
+                cin >> quantity;
+                cout << FNB[index].stock << endl;
+                if (action == 1)
+                    FNB[index].stock += quantity;
+                else if (action == 2)
+                    FNB[index].stock -= quantity;
+                cout << FNB[index].stock << endl;
+                LoadFBRecord(fbrecord);
+
+
+                cout << "\t\t\t\033[1;92mStock Updated.\033[0m" << endl;
+
+            }
+            else
+                cout << "\t\t\t\033[1;31mInvalid id detected!!!\033[0m" << endl;
+        }
+        else if (action == 3)
+            decision = false;
+        else
+        {
+            cout << "\t\t\t\033[1;31mInvalid Action!!! Please enter <1> <2> <3>\033[0m" << endl;
+
+        }
+
+
+    } while (decision);
+}
+
+
+
+void FBManagement()
+{
+    ReadTextRecord(0);
+    for (int i = 0; i < 7; i++)
+    {
+        cout << "\t\t\t\t\t\t\t\t" << text[8][i] << endl;
+    }
+    cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+    bool con = true;
+    do {
+        int selection;
+        cout << "\t\t\t<1> Add New Food and Beverage" << endl;
+        cout << "\t\t\t<2> Delete Existing Food and Beverage" << endl;
+        cout << "\t\t\t<3> Inventory Management" << endl;
+        cout << "\t\t\t<4> Return to Administrator Menu" << endl;
+        cout << "\t\t\tPlease enter your selection: ";
+        cin >> selection;
+        if (selection == 1)
+        {
+            system("cls");
+            addFB();
+        }
+        else if (selection == 2)
+        {
+            system("cls");
+            deleteFB(selection);
+        }
+        else if (selection == 3)
+        {
+            system("cls");
+            inventoryFB(selection);
+        }
+        else if (selection == 4)
+        {
+            system("cls");
+            AdministratorMenu();
+            con = false;
+        }
+        else
+            cout << "\t\t\t\033[1;31mWrong Input!!! Please enter <1> <2> <3>\033[0m" << endl;
+    } while (con);
+}
+
+
+
+
+void ReadFBRecord(int& fbrecord)
+{
+    ifstream infile;
+    infile.open("foodAndBeverage.txt");
+    if (infile.is_open())
+    {
+        while (!infile.eof())
+        {
+            getline(infile, FNB[fbrecord].foodcode);
+            getline(infile, FNB[fbrecord].foodname);
+            infile >> FNB[fbrecord].regular_price >> FNB[fbrecord].large_price;
+            infile >> FNB[fbrecord].stock;
+            infile.ignore();
+            fbrecord++;
+        }
+        infile.close();
+    }
+    else
+        cout << "\t\t\t\033[1;31mPlease contact Cinema Admin for further assistance...\033[0m";
+}
+void LoadFBRecord(int& fbrecord)
+{
+    ofstream outfile;
+    outfile.open("foodAndBeverage.txt");
+    for (int i = 0; i < fbrecord; i++)
+    {
+        outfile << FNB[i].foodcode << endl;
+        outfile << FNB[i].foodname << endl;
+        outfile << FNB[i].regular_price << " " << FNB[i].large_price << endl;
+        outfile << FNB[i].stock;
+        if (i != fbrecord - 1)
+            outfile << endl;
+    }
+}
+
+
+void purchaseFB(int& point)
+{
+    ReadTextRecord(0);
+    for (int i = 0; i < 7; i++)
+    {
+        cout << "\t\t\t\t\t\t\t\t" << text[11][i] << endl;
+    }
+    cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+    int fbrecord = 0;
+    ReadFBRecord(fbrecord);
+    string checking = "9999";
+    int nomember = 0;
+    GetSystemTime(&systemTime);
+    cout << "\n\n\n\n\t\t\t" << string(150, char(95)) << endl;
+    cout << "\t\t\t" << setw(134) << systemTime.wDay << "/" << systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
+    cout << "\t\t\t" << string(150, char(95)) << endl;
+    for (int i = 0; i < fbrecord; i++)
+    {
+        cout << showpoint << fixed << setprecision(2);
+        cout <<"\t\t\t"<< setw(5) << "<" << i + 1 << ">" << setw(30) << FNB[i].foodname << "\t" << setw(10) << FNB[i].regular_price << "\t" << setw(6) << FNB[i].large_price << endl;
+    }
+    int choice, size, time_validate = 0, date = 0, month = 0, year = 0, dd, mm, yyyy;
+    string currentdate;
+    double price, total = 0;
+    int quantity;
+    bool correct = 0, validated;
+    char cont;
+    string foodname[30] = {};
+    int total_quantity[30] = {};
+    double unit_price[30] = {};
+    int checker=0,trace_member, tracked = 0, largest = 0, number;
+    do {
+        cin.clear();
+        cout << "\t\t\tDear customer, please input current date (refer to upper right)" << endl;
+        cout << "\t\t\tcurrent date in DD MM YYYY form >>>";
+        cin >> dd >> mm >> yyyy;
+        TimeChecking(dd, mm, yyyy, date, month, year, time_validate);
+        if (time_validate > 0)
+        {
+            validated = false;
+            if (mm < 10)
+                currentdate = to_string(dd) + " " + to_string(0)+to_string(mm) + " " + to_string(yyyy);
+            else
+                currentdate = to_string(dd) + " " + to_string(mm) + " " + to_string(yyyy);
+        }
+        else
+            cout << "\t\t\t\033[1;31mInvalid input detected.\033[0m" << endl;
+    } while (validated);
+    do {
+
+        do {
+            cout << "\n\n\n\t\t\tEnter your choice: ";
+            cin >> choice;
+            if (choice <1 || choice>fbrecord)
+                cout << "\t\t\t\033[1;31mInvalid Input!!!\033[0m" << endl;
+
+            else
+                correct = 1;
+
+        } while (correct == 0);
+        correct = 0;
+        do {
+            cout << "\t\t\tSize: <1> Regular <2> Large: ";
+            cin >> size;
+            if (size < 1 || size>2)
+                cout << "\t\t\t\033[1;31mInvalid Input!!!\033[0m" << endl;
+            else
+                correct = 1;
+        } while (correct == 0);
+        correct = 0;
+        do {
+            cout << "\t\t\tQuantity: ";
+            cin >> quantity;
+            if (quantity < 0)
+                cout << "\t\t\t\033[1;31mInvalid Input!!!\033[0m";
+            else if (quantity > FNB[choice - 1].stock)
+                cout << "\t\t\t\033[1;31mOut of Stock!!!\033[0m" << endl;
+            else
+                correct = 1;
+        } while (correct == 0);
+
+        if (size == 1)
+        {
+            price = FNB[choice - 1].regular_price * quantity;
+            unit_price[checker] = FNB[choice - 1].regular_price;
+        }
+        else
+        {
+            price = FNB[choice - 1].large_price * quantity;
+            unit_price[checker] = FNB[choice - 1].large_price;
+        }
+
+
+        foodname[checker] = FNB[choice - 1].foodname;
+        total_quantity[checker] = quantity;
+        total += price;
+        point = int(total);//must be in integer ohh
+
+        FNB[choice - 1].stock -= quantity;
+        LoadFBRecord(fbrecord);
+
+        cout << "\t\t\tDo you want to add another F&B? <Y> to continue...";
+        cin >> cont;
+        checker++;
+    } while (toupper(cont) == 'Y');
+    cin.ignore();
+    OpenMemberDetails(nomember);
+    MemberChecking(checking, nomember);
+    cout << "\t\t\t" << string(60, char(32)) << " PAYMENT SUMMARY " << string(60, char(32)) << endl;
+    cout << "\n\t\t\t" << string(150, char(95)) << endl;
+    cout << "\t\t\t" << setw(134) << systemTime.wDay << "/" << systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
+    cout << "\t\t\t" << string(150, char(95)) << endl;
+    cout << "\t\t\t" << string(150, char(95)) << endl;
+    if (!(checking == "9999" || checking == "9998"))
+        cout << "\t\t\t Member Name >>" << Member[stoi(checking)].Details_name << endl;
+    cout << "\t\t\t" << string(150, char(95)) << endl;
+    cout << fixed << setprecision(2) << endl;
+    cout << "\t\t\t\t"<<setw(20)<<"F & B name\t\t\t\t Unit Price\t\t\t\tQuantity\t\t\t\tTotal Price" << endl;
+    for (int i = 1; i <= checker; i++)
+    {
+        cout << "\t\t\t" << setw(20) << foodname[i - 1] << "\t\t\t\t" << unit_price[i-1] << "\t\t\t\t\t" << total_quantity[i-1] << "\t\t\t\t\t" << unit_price[i-1] * total_quantity[i-1] << endl;
+    }
+    cout << "\t\t\t" << string(150, char(95)) << endl;
+    cout << "\t\t\t" << string(150, char(95)) << endl;
+    cout << "\t\t\t\tTotal price \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << total << endl;
+    cout<< "\t\t\t\tservice tax \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << total*service_tax << endl;
+    cout << "\t\t\t\tPrice After Tax \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\033[1;92m" << total * service_tax+total <<"\033[0m"<< endl;
+    cout << fixed << setprecision(0) << endl;
+    if (!(checking == "9999" || checking == "9998"))
+        cout << "\t\t\t\tTotal point \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << point << endl;
+    cout << "\t\t\t" << string(150, char(95)) << endl;
+    system("pause");
+    if (!(checking == "9999" || checking == "9998"))
+    {
+        trace_member = stoi(checking);
+        OpenPurchaseHistory();
+        number = 0;
+        UpdateHistory(trace_member, number);
+        Purchase[trace_member].Purchase_date[number] = currentdate;
+        Purchase[trace_member].Purchase_movie[number] = "N/A";
+        Purchase[trace_member].Purchase_pax[number] = "N/A";
+        string food;
+        for (int i = 1; i <= checker; i++)
+        {
+            food += foodname[i-1];
+            if (i < checker) {
+                food += ", ";
+            }
+        }
+        Purchase[trace_member].Purchase_food[number] = food;
+        Member[trace_member].Details_point = to_string(int(stoi(Member[trace_member].Details_point) + point));
+        LoadPurchaseHistory(nomember);
+        LoadMemberDetail(nomember);
+    }
+}
+
+
+
+
+
