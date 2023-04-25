@@ -97,6 +97,8 @@ void purchaseFB(int); //function to purchase fnb
 
 void ReadFBRecord(int&); //read txt file
 void LoadFBRecord(int&); //update txt file
+void LoadMemberDetail(int&);
+void LoadPurchaseHistory(int&);
 //structure declaration
 struct mapping_seats{
 	int hall, data, row[70], column[70];
@@ -3370,6 +3372,21 @@ void purchaseFB(int option)
     }
 }
 
+void ReadTextRecord(int record){
+	ifstream infile;
+	infile.open("Title.txt");
+	if (infile.fail())
+		cout << "unable to open the file" << endl;
+	else{
+		while (!infile.eof()){
+			for (int i = 0; i < 21; i++){
+				for (int j = 0; j < 7; j++){
+					getline(infile, text[i][j]);
+				}
+			}
+		}
+	}
+}
 
 
 
