@@ -687,8 +687,6 @@ void WriteMemberDetails(int& nomember) //store updated info
 }
 void UpdatedMember(int& update) //show updated info
 {
-	int nomember = 0;
-
 	system("cls");
 	cout << "\t\t\tUpdated Details " << endl << endl;
 	ViewMemberDetails(update);
