@@ -2685,10 +2685,10 @@ void PurchaseNow(int option)
 		cout << "\n\t\t\t\t" << string(150, char(95)) << endl;
 		cout << "\t\t\t\t<1> Book a movie UwU " << endl;
 		cout << "\t\t\t\t<2> Food & Beverages UnU" << endl;
-		cout << "\t\t\t\t<3> Exit " << "\n\t\t\t" << string(150, char(95))<< endl;
+		cout << "\t\t\t\t<3> Exit " << "\n\t\t\t\t" << string(150, char(95))<< endl;
 		cout << "\n\t\t\t\tInput your selection >>> ";
 		getline(cin, selection);
-		if(selection=="1")
+		if (selection == "1")
 			BookMovie(1);
 		else if (selection == "2")
 			cout << "hello" << endl;
@@ -2711,7 +2711,7 @@ void BookMovie(int option)
 		}
 		ReadMovieRecord(record);
 		GetSystemTime(&systemTime);
-		cout << "\n\n\n\n\t\t\t" << string(150, char(95)) << endl;
+		cout << "\n\n\n\t\t\t" << string(150, char(95)) << endl;
 		cout << "\t\t\t" << setw(134) <<systemTime.wDay << "/" <<systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
 		cout << "\t\t\t" << string(150, char(95)) << endl;
 		MoviePrinting(record, 0);
@@ -2755,20 +2755,29 @@ void BookMovie(int option)
 		else if (inner == 0){
 			cout << "\t\t\tno result found...\n\t\t\tReturn to booking page" << endl;
 			Sleep(1000);
-			return BookMovie(0);
 		}
 		else {
 			cout << "\t\t\t" << string(150, char(95)) << endl;
 			bool confirms = true;
-			int found = 0, adult, child, total_people=0;
+			int found = 0, adult, child, total_people=0,digit=0;
 			string people[25] = {};
 			string booking="w";
 			while (confirms){
 				cout << "\t\t\tInput the showtime of the movie <E>xit >>>";
 				getline(cin, movie_time);
+				for (int i = 0; i < movie_time.length(); i++) {
+					if (isdigit(movie_time[i]))
+						digit++;
+				}
 				if (movie_time == "E" || movie_time == "e"){
 					confirms = false;
 					decision = false;
+				}
+				else if (digit != movie_time.length())
+				{
+					confirms = false;
+					cout << "\t\t\tError detected....Leaving to booking page" << endl;
+					Sleep(1000);
 				}
 				else{
 					int noMovie[10] = {}, index = 0, number = 0;
