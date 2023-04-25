@@ -3042,7 +3042,7 @@ void CinemaRefresh(int option)
 				movie[i].seats.data = 0;				//update seats data
 				movie[i].seats.purchased_row[0] = 0;
 				movie[i].seats.purchased_column[0] = 0;
-				if (movie[i].movie_hall <= hall_record || movie[i].movie_hall > 0){//refresh the data of cinema hall
+				if (movie[i].movie_hall <= hall_record && movie[i].movie_hall > 0){//refresh the data of cinema hall
 					movie[i].backup.data = unavailable[movie[i].movie_hall - 1].data;
 					if (movie[i].backup.data > 0){
 						for (int j = 0; j < movie[i].backup.data; j++){
