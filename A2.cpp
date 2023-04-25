@@ -25,6 +25,8 @@ void OpenCustomerFeedback(int&, double&);
 //open member info files
 void OpenMemberDetails(int&);
 void OpenPurchaseHistory();
+void ViewMemberDetails(int&);
+void ViewPurchaseHistory(int&);
 //Membership Details
 void MembershipDetails();
 void UserLogIn();
@@ -32,8 +34,6 @@ void UserRegister();
 //Membership management
 void WriteMemberDetails(int&);
 void WritePurchaseHistory(int&);
-void ViewMemberDetails(int&);
-void ViewPurchaseHistory(int&);
 void MembershipManagement();
 void Admin_MemberDetails();
 void Admin_PurchaseHistory();
@@ -383,8 +383,8 @@ void AdministratorMenu(int option){
 			cout << "\t\t\tInvalid input found" << endl;
 	} 
 }
-
-void OpenPurchaseHistory(){//Open member info files
+//Open member info files
+void OpenPurchaseHistory(){
 	ifstream Ad_purchase;
 	int k = 0;
 	Ad_purchase.open("Admin_purchase.txt");
@@ -426,6 +426,36 @@ void OpenMemberDetails(int& nomember){
 	else
 		cout << "Please contact admin for further assistance..." << endl;
 	Ad_memberlist.close();
+}
+void ViewMemberDetails(int& need)
+{
+	int nomember = 0;
+	cout << "\t**************************************************************************" << endl << endl;
+	cout << "\t\t\tUsername: " << Member[need].Details_user << endl;
+	cout << "\t\t\tPassword: " << Member[need].Details_password << endl;
+	cout << "\t\t\tName: " << Member[need].Details_name << endl;
+	cout << "\t\t\tStatus: " << Member[need].Details_status << endl;
+	cout << "\t\t\tJoin date: " << Member[need].Details_join << endl;
+	cout << "\t\t\tAccumulated point(s): " << Member[need].Details_point << endl;
+	cout << "\t\t\tPhone number: " << Member[need].Details_phone << endl;
+	cout << "\t\t\tEmail address: " << Member[need].Details_email << endl << endl;
+	cout << "\t**************************************************************************" << endl << endl;
+}
+void ViewPurchaseHistory(int& need)
+{
+	OpenPurchaseHistory();
+	cout << "\t**************************************************************************" << endl << endl;
+	cout << "\t\t\tUsername: " << Purchase[need].Purchase_user << endl;
+	cout << "\t\t\tName: " << Purchase[need].Purchase_name << endl << endl;
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[need].Purchase_date[i] << endl;
+		cout << "\t\t\tNumber of pax (Child Adult): " << Purchase[need].Purchase_pax[i] << endl;
+		cout << "\t\t\tMovie: " << Purchase[need].Purchase_movie[i] << endl;
+		cout << "\t\t\tF&B: " << Purchase[need].Purchase_food[i] << endl << endl;
+	}
+	cout << "\t**************************************************************************" << endl << endl;
+
 }
 //Membership Details (for user)
 void UserRegister() {//add new member
@@ -504,7 +534,6 @@ void UserRegister() {//add new member
 	}
 	Add_purchase.close();
 }
-
 void UserLogIn() //for existing member
 {
 	int selection, nomember = 0;
@@ -576,8 +605,7 @@ void UserLogIn() //for existing member
 
 	system("PAUSE");
 }
-
-void MembershipDetails()
+void MembershipDetails() //membership details menu
 {
 	int selection;
 	bool decision = true;
@@ -615,38 +643,7 @@ void MembershipDetails()
 		}
 	} while (decision);
 }
-
 //Membership Management (Admin)
-void ViewMemberDetails(int& need)
-{
-	int nomember = 0;
-	cout << "\t**************************************************************************" << endl << endl;
-	cout << "\t\t\tUsername: " << Member[need].Details_user << endl;
-	cout << "\t\t\tPassword: " << Member[need].Details_password << endl;
-	cout << "\t\t\tName: " << Member[need].Details_name << endl;
-	cout << "\t\t\tStatus: " << Member[need].Details_status << endl;
-	cout << "\t\t\tJoin date: " << Member[need].Details_join << endl;
-	cout << "\t\t\tAccumulated point(s): " << Member[need].Details_point << endl;
-	cout << "\t\t\tPhone number: " << Member[need].Details_phone << endl;
-	cout << "\t\t\tEmail address: " << Member[need].Details_email << endl << endl;
-	cout << "\t**************************************************************************" << endl << endl;
-}
-void ViewPurchaseHistory(int& need)
-{
-	OpenPurchaseHistory();
-	cout << "\t**************************************************************************" << endl << endl;
-	cout << "\t\t\tUsername: " << Purchase[need].Purchase_user << endl;
-	cout << "\t\t\tName: " << Purchase[need].Purchase_name << endl << endl;
-	for (int i = 0; i < 5; i++)
-	{
-		cout << "\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[need].Purchase_date[i] << endl;
-		cout << "\t\t\tNumber of pax (Child Adult): " << Purchase[need].Purchase_pax[i] << endl;
-		cout << "\t\t\tMovie: " << Purchase[need].Purchase_movie[i] << endl;
-		cout << "\t\t\tF&B: " << Purchase[need].Purchase_food[i] << endl << endl;
-	}
-	cout << "\t**************************************************************************" << endl << endl;
-
-}
 void WritePurchaseHistory(int& nomember) //store updated info
 {
 	ofstream Ad_purchase;
