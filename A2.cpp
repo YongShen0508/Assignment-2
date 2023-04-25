@@ -2821,7 +2821,7 @@ void BookMovie(int option)
 										payment = false;
 										confirms = false;
 										decision = false;
-										booking == "N";
+										booking = "N";
 									}
 									else
 										cout << "\t\t\tInvalid input detected." << endl;
