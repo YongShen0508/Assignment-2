@@ -2428,10 +2428,10 @@ void PurchaseNow(int option)
 }
 void BookMovie(int option)
 {
-	bool decision = true, validated = true;
+	bool decision=true,validated=true;
 	do {
-		int record = 0, result = 0, time_validate = 0, inner = 0, movie_hall[30] = {}, date = 0, month = 0, year = 0, dd, mm, yyyy;
-		string keyword, movie_time, currentdate;
+		int record = 0, result = 0, time_validate = 0, inner = 0, movie_hall[30] = {}, date = 0, month = 0, year = 0, dd, mm, yyyy, moviefound[30] = {};
+		string keyword, movie_time,currentdate;
 		system("cls");
 		for (int i = 0; i < 7; i++) {
 			cout << "\t\t\t\t\t\t" << text[10][i] << endl;
@@ -2439,7 +2439,7 @@ void BookMovie(int option)
 		ReadMovieRecord(record);
 		GetSystemTime(&systemTime);
 		cout << "\n\n\n\t\t\t" << string(150, char(95)) << endl;
-		cout << "\t\t\t" << setw(134) << systemTime.wDay << "/" << systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
+		cout << "\t\t\t" << setw(134) <<systemTime.wDay << "/" <<systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
 		cout << "\t\t\t" << string(150, char(95)) << endl;
 		MoviePrinting(record, 0);
 		cout << "\t\t\t" << string(150, char(95)) << endl;
@@ -2449,7 +2449,7 @@ void BookMovie(int option)
 			cout << "\t\t\tcurrent date in DD MM YYYY form >>>";
 			cin >> dd >> mm >> yyyy;
 			TimeChecking(dd, mm, yyyy, date, month, year, time_validate);
-			if (time_validate > 0) {
+			if (time_validate > 0){
 				validated = false;
 				currentdate = to_string(dd) + " " + to_string(mm) + " " + to_string(yyyy);
 			}
@@ -2458,15 +2458,16 @@ void BookMovie(int option)
 		} while (validated);
 		cin.ignore();
 		cout << "\t\t\tInput the keyword to search the movie <E>xit >>>";
-		getline(cin, keyword);
+		getline(cin,keyword);
 		keyword = upper(keyword);
-		for (int i = 0; i < record; i++) {
-			if (movie[i].movie_name.find(keyword) != string::npos) {//keyword checking process
+		for (int i = 0; i < record; i++){
+			if (movie[i].movie_name.find(keyword) != string::npos){//keyword checking process
+				moviefound[inner] = i;
 				inner++;
-				if (inner == 1) {
+				if (inner== 1){
 					system("cls");
 					cout << "\n\n\n\n\t\t\t" << string(150, char(95)) << endl;
-					cout << "\t\t\t" << setw(135) << systemTime.wDay << "/" << systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
+					cout << "\t\t\t" << setw(135) <<systemTime.wDay << "/" <<systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
 					cout << "\t\t\t" << string(150, char(95)) << endl;
 				}
 				cout << "\n\t\t\tNo. " << inner << endl;
@@ -2479,24 +2480,24 @@ void BookMovie(int option)
 		}
 		if (keyword == "E")
 			decision = false;
-		else if (inner == 0) {
+		else if (inner == 0){
 			cout << "\t\t\tno result found...\n\t\t\tReturn to booking page" << endl;
 			Sleep(1000);
 		}
 		else {
 			cout << "\t\t\t" << string(150, char(95)) << endl;
 			bool confirms = true;
-			int found = 0, adult, child, total_people = 0, digit = 0;
+			int found = 0, adult, child, total_people=0,digit=0;
 			string people[25] = {};
-			string booking = "w";
-			while (confirms) {
+			string booking="w";
+			while (confirms){
 				cout << "\t\t\tInput the showtime of the movie>>>";
 				getline(cin, movie_time);
 				for (int i = 0; i < movie_time.length(); i++) {
 					if (isdigit(movie_time[i]))
 						digit++;
 				}
-				if (movie_time == "E" || movie_time == "e") {
+				if (movie_time == "E" || movie_time == "e"){
 					confirms = false;
 					decision = false;
 				}
@@ -2506,17 +2507,17 @@ void BookMovie(int option)
 					cout << "\t\t\tError detected....Leaving to booking page" << endl;
 					Sleep(1000);
 				}
-				else {
+				else{
 					int noMovie[10] = {}, index = 0, number = 0;
 					bool result = MovieStartDetection(movie_time);
 
-					for (int i = 0; i < record; i++) {
-						if (movie_time == movie[i].movie_time) {
-							noMovie[found] = i;
+					for (int i = 0; i < record; i++){
+						if (movie_time == movie[moviefound[i]].movie_time) {
+							noMovie[found] = moviefound[i];
 							found++;
 						}
 					}
-					if (result && found > 0) {
+					if (result&&found>0){
 						do {
 							string booking;
 							cin.clear();
@@ -2533,7 +2534,7 @@ void BookMovie(int option)
 							int row[25];
 							int column[25];
 							bool payment = true;
-							if (booking == "Y") {
+							if (booking == "Y"){
 								NumberTicket(index, child, adult, row, column);
 								cin.ignore();
 								do {
@@ -2541,7 +2542,7 @@ void BookMovie(int option)
 									cout << "\t\t\tAre you confirms with this booking <Y>es <N>o>>>";
 									getline(cin, final);
 									final = upper(final);
-									if (final == "Y")
+									if (final == "Y") 
 										payment = false;
 									else if (final == "N") {
 										cout << "\t\t\tPayment declined" << endl;
@@ -2553,7 +2554,7 @@ void BookMovie(int option)
 									else
 										cout << "\t\t\tInvalid input detected." << endl;
 								} while (payment);
-								if (final == "Y") {
+								if (final == "Y"){
 									double price_child, price_adult, total_price, points;
 									int nomember = 0, record = 0;
 									OpenMemberDetails(nomember);
@@ -2582,18 +2583,20 @@ void BookMovie(int option)
 									cout << "\t\t\t" << string(150, char(95)) << endl;
 									cout << "\t\t\t\t   Seat Number" << endl;
 									cout << "\t\t\t\t row" << "\t column " << endl;
-									for (int i = 0; i < child + adult; i++) {
+									for (int i = 0; i < child + adult; i++){
 										cout << "\t\t\t\t  " << row[i] << "\t  " << column[i] << endl;
 									}
 									cout << "\t\t\t" << string(150, char(95)) << endl;
 									cout << "\t\t\t\tTotal price \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << total_price << endl;
+									cout << "\t\t\t\tservice tax \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << total_price * service_tax << endl;
+									cout << "\t\t\t\tPrice After Tax \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << total_price * service_tax + total_price << endl;
 									cout << fixed << setprecision(0) << endl;
 									if (!(checking == "9999" || checking == "9998"))
 										cout << "\t\t\t\tTotal point \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << points << endl;
 									cout << "\t\t\t" << string(150, char(95)) << endl;
 									cout << "\t\t\t" << string(60, char(32)) << " END OF PAGE " << string(60, CHAR(32)) << endl;
 									cout << "\t\t\t" << string(150, char(95)) << endl;
-									if (!(checking == "9999" || checking == "9998")) {
+									if (!(checking == "9999" || checking == "9998")){
 										OpenPurchaseHistory();
 										int trace_member, tracked = 0, largest = 0;
 										trace_member = stoi(checking);
@@ -2606,7 +2609,7 @@ void BookMovie(int option)
 										Member[trace_member].Details_point = to_string(int(stoi(Member[trace_member].Details_point) + points));
 									}
 									int j = 0;
-									for (int i = movie[index].seats.data; i < movie[index].seats.data + adult + child; i++) {
+									for (int i = movie[index].seats.data; i < movie[index].seats.data + adult + child; i++){
 										movie[index].seats.purchased_row[i] = row[j];
 										movie[index].seats.purchased_column[i] = column[j];
 										j++;
@@ -2619,9 +2622,9 @@ void BookMovie(int option)
 									system("pause");
 								}
 							}
-							else if (booking == "N") {
+							else if (booking == "N"){
 								number++;
-								if (number == found) {
+								if (number == found){
 									cout << "\t\t\tNo other movie found. Back to movie page" << endl;
 									cout << "\t\t\t";
 									system("pause");
@@ -2630,7 +2633,7 @@ void BookMovie(int option)
 							}
 							else
 								cout << "\t\t\tInvalid input detected." << endl;
-						} while (booking == "N" || booking != "Y");
+						} while (booking == "N"||booking!="Y");
 					}
 					else
 						cout << "\t\t\tInvalid showtime detected..." << endl;
