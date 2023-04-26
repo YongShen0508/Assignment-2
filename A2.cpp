@@ -1502,7 +1502,7 @@ void DeleteCinemaSeat(int& record){
 	cout << "\t\t\tPlease input the cinema hall number >>>";
 	cin >> number;
 	if (number > 0 && number <= record){
-		cout << "\n\n" << string(100, char(61)) << "\n\n";
+		cout << "\n\n\t\t\t" << string(100, char(61)) << "\n\n";
 		cout << "\t\t\tCinema hall " << number << endl;
 		CinemaSeatPrinting(number - 1, 99);
 		bool decision = true;
@@ -1542,7 +1542,6 @@ void DeleteCinemaSeat(int& record){
 					}
 					break;
 				}
-
 			}
 			if (found == 0)//no column and row found
 				cout << "\t\t\t\033[1;31mNo data found in system\033[0m" << endl;
@@ -1557,6 +1556,7 @@ void DeleteCinemaSeat(int& record){
 		cout << "\t\t\t\033[1;31mno cinema hall seat found\033[0m" << endl;
 	cin.ignore();
 }
+
 void ConfirmAddCinemaSeat(int number, int row, int column){
 	char confirms;
 	cout << "Are you confirm add row " << row << " and " << "column " << column << " <Y>es <N>o  >>";
