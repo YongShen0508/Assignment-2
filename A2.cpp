@@ -357,9 +357,7 @@ void AdministratorMenu(int option) {
 		ReadTextRecord(0);
 		cout << "\n\n" << endl;
 		for (int i = 0; i < 7; i++) {
-			SetConsoleTextAttribute(console, 14);
 			cout << "\t\t\t\t\t\t\t\t" << text[14][i] << endl;
-			SetConsoleTextAttribute(console, 7);
 		}
 		cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
 		cout << "\n\t\t\t\tDear Admin, kindly key in your Admin ID and password" << endl;
@@ -401,9 +399,9 @@ void AdministratorMenu(int option) {
 		system("cls");
 		ReadTextRecord(0);
 		for (int i = 0; i < 7; i++) {
-			SetConsoleTextAttribute(console, 142);
+			SetConsoleTextAttribute(console, 14);
 			cout << "\t\t\t" << text[1][i] << endl;
-			SetConsoleTextAttribute(console, 143);
+			SetConsoleTextAttribute(console, 7);
 		}
 		string selection;
 		cout << "\n\n\n\t\t\t" << string(150, char(95)) << endl;
@@ -434,6 +432,7 @@ void AdministratorMenu(int option) {
 			cout << "\t\t\tInvalid input found" << endl;
 	}
 }
+
 //Open member info files
 void OpenPurchaseHistory() {
 	ifstream Ad_purchase;
