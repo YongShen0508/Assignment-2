@@ -2351,13 +2351,12 @@ void PurchaseNow(int option){
 		if (selection == "1")//book  movie
 			BookMovie(1);
 		else if (selection == "2")//purchase FB
-			purchaseFB();
+			purchaseFB(2);
 		else if (selection == "3")
 			decision = false;
 		else
 			cout << "\t\t\tinvalid input" << endl;
 	} while (decision);
-
 }
 void BookMovie(int option)
 {
