@@ -3407,36 +3407,35 @@ void ReadTextRecord(int record) {
 		}
 	}
 }
-void Main_Menu(string Name){
+void Main_Menu(string Name) {
 	for (int i = 0; i < 7; i++) {
+		SetConsoleTextAttribute(console, 14);
 		cout << "\t\t\t\t\t" << text[21][i] << endl;
+		SetConsoleTextAttribute(console, 7);
 	}
 	int i = 126;
-	cout << "\n\n\n\t\t\t" << string(122, char(61)) << "\n";
+	cout << "\n\t\t\t" << string(122, char(61)) << "\n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
-	cout << "\t\t\t||" << string(4, ' ') << string(20, char(i)) << string(22, ' ') << string(23, char(126)) << string(25, ' ') << string(19, char(i)) << string(5, ' ') << "|| \n";
+	cout << "\t\t\t||" << string(4, ' ') << "." << string(18, char(i)) << "." << string(22, ' ') << "." << string(21, char(i)) << "." << string(25, ' ') << "." << string(17, char(i)) << "." << string(5, ' ') << "|| \n";
 	cout << "\t\t\t||" << string(4, ' ') << "[ 1| Movie Details ]" << string(22, ' ') << "[ 2| Food & Beverages ]" << string(25, ' ') << "[ 3. Purchase Now ]" << string(5, ' ') << "|| \n";
-	cout << "\t\t\t||" << string(4, ' ') << string(20, char(i)) << string(22, ' ') << string(23, char(126)) << string(25, ' ') << string(19, char(i)) << string(5, ' ') << "|| \n";
+	cout << "\t\t\t||" << string(4, ' ') << "." << string(18, char(i)) << "." << string(22, ' ') << "." << string(21, char(i)) << "." << string(25, ' ') << "." << string(17, char(i)) << "." << string(5, ' ') << "|| \n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
-	cout << "\t\t\t||" << string(24, ' ') << string(22, char(i)) << string(23, ' ') << string(25, char(i)) << string(24, ' ') << "|| \n";
+	cout << "\t\t\t||" << string(24, ' ') << "." << string(20, char(i)) << "." << string(23, ' ') << "." << string(23, char(i)) << "." << string(24, ' ') << "|| \n";
 	cout << "\t\t\t||" << string(24, ' ') << "[ 4| Membership Page ]" << string(23, ' ') << "[ 5| Administrator Page ]" << string(24, ' ') << "|| \n";
-	cout << "\t\t\t||" << string(24, ' ') << string(22, char(i)) << string(23, ' ') << string(25, char(i)) << string(24, ' ') << "|| \n";
+	cout << "\t\t\t||" << string(24, ' ') << "." << string(20, char(i)) << "." << string(23, ' ') << "." << string(23, char(i)) << "." << string(24, ' ') << "|| \n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
-	cout << "\t\t\t||" << string(45, ' ') << string(25, char(i)) << string(48, ' ') << "|| \n";
+	cout << "\t\t\t||" << string(45, ' ') << "." << string(23, char(i)) << "." << string(48, ' ') << "|| \n";
 	cout << "\t\t\t||" << string(45, ' ') << "| 6| Customer Feedback  |" << string(48, ' ') << "|| \n";
-	cout << "\t\t\t||" << string(45, ' ') << string(25, char(i)) << string(48, ' ') << "|| \n";
+	cout << "\t\t\t||" << string(45, ' ') << "." << string(23, char(i)) << "." << string(48, ' ') << "|| \n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
-	cout << "\t\t\t||" << string(51, ' ') << string(13, char(i)) << string(54, ' ') << "|| \n";
+	cout << "\t\t\t||" << string(51, ' ') << "." << string(11, char(i)) << "." << string(54, ' ') << "|| \n";
 	cout << "\t\t\t||" << string(51, ' ') << "[ 7|  EXIT  ]" << string(54, ' ') << "|| \n";
-	cout << "\t\t\t||" << string(51, ' ') << string(13, char(i)) << string(54, ' ') << "|| \n";
+	cout << "\t\t\t||" << string(51, ' ') << "." << string(11, char(i)) << "." << string(54, ' ') << "|| \n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
 	cout << "\t\t\t" << string(122, char(61)) << "\n";
 }
-
-
-
