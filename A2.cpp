@@ -144,6 +144,8 @@ string text[40][7];
 
 int main() {
 	system("chcp 65001");
+	ReadTextRecord(0);
+	SetConsoleTextAttribute(console, 143);
 	string selection;
 	bool decision = true;
 	do {
@@ -159,9 +161,9 @@ int main() {
 			PurchaseNow(3);
 		else if (selection == "4")//membership details
 			MembershipDetails();
-		else if (selection == "5")
+		else if (selection == "5")//admin page
 			AdministratorMenu(5);
-		else if (selection == "6")
+		else if (selection == "6")//customer feedback
 			CustomerFeedback();
 		else if (selection == "7")//exit
 			decision = false;
@@ -3336,7 +3338,7 @@ void ReadTextRecord(int record) {
 		cout << "unable to open the file" << endl;
 	else {
 		while (!infile.eof()) {
-			for (int i = 0; i < 21; i++) {
+			for (int i = 0; i < 22; i++) {
 				for (int j = 0; j < 7; j++) {
 					getline(infile, text[i][j]);
 				}
@@ -3344,8 +3346,8 @@ void ReadTextRecord(int record) {
 		}
 	}
 }
-void Main_Menu(string Name)
-{ 	for (int i = 0; i < 7; i++) {
+void Main_Menu(string Name){
+	for (int i = 0; i < 7; i++) {
 		cout << "\t\t\t\t\t" << text[21][i] << endl;
 	}
 	int i = 126;
@@ -3374,7 +3376,6 @@ void Main_Menu(string Name)
 	cout << "\t\t\t||" << right << setw(121) << "||\n";
 	cout << "\t\t\t" << string(122, char(61)) << "\n";
 }
-
 
 
 
