@@ -3244,6 +3244,7 @@ void LoadFBRecord(int& fbrecord)
 }
 void purchaseFB(int option)
 {
+	system("cls");
 	ReadTextRecord(0);
 	cout<<"\033[1;96m";
 	for (int i = 0; i < 7; i++)
