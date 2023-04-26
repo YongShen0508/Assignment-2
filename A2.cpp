@@ -3168,11 +3168,12 @@ void inventoryFB(int option)
 void FBManagement()
 {
 	ReadTextRecord(0);
+	cout<<"\033[1;96m";
 	for (int i = 0; i < 7; i++)
 	{
 		cout << "\t\t\t\t\t\t\t\t" << text[8][i] << endl;
 	}
-	cout << "\n\n\t\t\t\033[5;93m" << string(150, char(95)) << endl;
+	cout << "\033[0m\n\n\t\t\t\033[5;93m" << string(150, char(95)) << endl;
 	cout << "\t\t\t"<<string(150, char(95))<<"\033[0m"<<endl;
 	bool con = true;
 	do {
