@@ -2527,7 +2527,6 @@ void BookMovie(int option)
 		cout << "\t\t\tInput the keyword to search the movie <E>xit >>>";
 		getline(cin, keyword);
 		Sleep(400);
-		system("pause");
 		keyword = upper(keyword);
 		for (int i = 0; i < record; i++) {
 			if (movie[i].movie_name.find(keyword) != string::npos) {//keyword checking process
