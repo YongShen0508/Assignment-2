@@ -2487,9 +2487,11 @@ void BookMovie(int option)
 		int record = 0, result = 0, time_validate = 0, inner = 0, movie_hall[30] = {}, date = 0, month = 0, year = 0, dd, mm, yyyy, moviefound[30] = {};
 		string keyword, movie_time, currentdate;
 		system("cls");
+		cout << "\033[1;96m";
 		for (int i = 0; i < 7; i++) {
 			cout << "\t\t\t\t\t\t" << text[10][i] << endl;
 		}
+		cout << "\033[0m";
 		ReadMovieRecord(record);
 		GetSystemTime(&systemTime);
 		cout << "\n\n\n\t\t\t" << string(150, char(95)) << endl;
@@ -2499,7 +2501,9 @@ void BookMovie(int option)
 		cout << "\t\t\t" << string(150, char(95)) << endl;
 		do {
 			cin.clear();
+			cout << "\033[1;33m";
 			cout << "\t\t\tDear customer, please input current date (refer to upper right)" << endl;
+			cout << "\033[0m";
 			cout << "\t\t\tcurrent date in DD MM YYYY form >>>";
 			cin >> dd >> mm >> yyyy;
 			TimeChecking(dd, mm, yyyy, date, month, year, time_validate);
@@ -2508,11 +2512,12 @@ void BookMovie(int option)
 				currentdate = to_string(dd) + " " + to_string(mm) + " " + to_string(yyyy);
 			}
 			else
-				cout << "\t\t\tInvalid input detected." << endl;
+				cout << "\t\t\t\033[1;31m Invalid input detected\033[0m" << endl;
 		} while (validated);
 		cin.ignore();
 		cout << "\t\t\tInput the keyword to search the movie <E>xit >>>";
 		getline(cin, keyword);
+		Sleep(400);
 		keyword = upper(keyword);
 		for (int i = 0; i < record; i++) {
 			if (movie[i].movie_name.find(keyword) != string::npos) {//keyword checking process
@@ -2524,8 +2529,8 @@ void BookMovie(int option)
 					cout << "\t\t\t" << setw(135) << systemTime.wDay << "/" << systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
 					cout << "\t\t\t" << string(150, char(95)) << endl;
 				}
-				cout << "\n\t\t\tNo. " << inner << endl;
-				cout << "\t\t\tMovie Name: " << movie[i].movie_name << endl;
+				cout << "\n\t\t\tNo. " << inner << endl;//yellow
+				cout << "\t\t\tMovie Name: " << movie[i].movie_name << endl;//blue
 				cout << "\t\t\tMovie Description: " << movie[i].description << endl;
 				cout << "\t\t\tMovie Time: " << movie[i].movie_time << endl;
 				cout << "\t\t\tMovie Length H.MM: " << fixed << setprecision(2) << movie[i].movie_length << endl;
@@ -2535,18 +2540,20 @@ void BookMovie(int option)
 		if (keyword == "E")
 			decision = false;
 		else if (inner == 0) {
-			cout << "\t\t\tno result found...\n\t\t\tReturn to booking page" << endl;
+			cout << "\t\t\t\033[1;31m no result found...\n\t\t\tReturn to booking page\033[0m" << endl;
 			Sleep(1000);
 		}
 		else {
 			cout << "\t\t\t" << string(150, char(95)) << endl;
 			bool confirms = true;
-			int found = 0, adult, child, total_people = 0, digit = 0;
+			int found = 0, adult, child, total_people = 0, digit;
 			string people[25] = {};
 			string booking = "w";
 			while (confirms) {
-				cout << "\t\t\tInput the showtime of the movie>>>";
+				cout << "\t\t\t\033[1;33mInput the showtime of the movie>>>";
 				getline(cin, movie_time);
+				cout << "\033[0m";
+				digit = 0;
 				for (int i = 0; i < movie_time.length(); i++) {
 					if (isdigit(movie_time[i]))
 						digit++;
@@ -2558,7 +2565,7 @@ void BookMovie(int option)
 				else if (digit != movie_time.length())
 				{
 					confirms = false;
-					cout << "\t\t\tError detected....Leaving to booking page" << endl;
+					cout << "\t\t\t\033[1;31mError detected....Leaving to booking page\033[0m" << endl;
 					Sleep(1000);
 				}
 				else {
@@ -2599,14 +2606,14 @@ void BookMovie(int option)
 									if (final == "Y")
 										payment = false;
 									else if (final == "N") {
-										cout << "\t\t\tPayment declined" << endl;
+										cout << "\t\t\t\033[1;31mPayment declined\033[0m" << endl;
 										payment = false;
 										confirms = false;
 										decision = false;
 										booking = "N";
 									}
 									else
-										cout << "\t\t\tInvalid input detected." << endl;
+										cout << "\t\t\t\033[1;31mInvalid input detected.\033[0m" << endl;
 								} while (payment);
 								if (final == "Y") {
 									double price_child, price_adult, total_price, points;
@@ -2643,7 +2650,7 @@ void BookMovie(int option)
 									cout << "\t\t\t" << string(150, char(95)) << endl;
 									cout << "\t\t\t\tTotal price \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << total_price << endl;
 									cout << "\t\t\t\tservice tax \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << total_price * service_tax << endl;
-									cout << "\t\t\t\tPrice After Tax \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << total_price * service_tax + total_price << endl;
+									cout << "\t\t\t\tPrice After Tax \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\033[1;92m" << total_price * service_tax + total_price << "\033[0m" << endl;
 									cout << fixed << setprecision(0) << endl;
 									if (!(checking == "9999" || checking == "9998"))
 										cout << "\t\t\t\tTotal point \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" << points << endl;
@@ -2681,18 +2688,18 @@ void BookMovie(int option)
 							else if (booking == "N") {
 								number++;
 								if (number == found) {
-									cout << "\t\t\tNo other movie found. Back to movie page" << endl;
+									cout << "\t\t\t\033[1;31mNo other movie found. Back to movie page\033[0m" << endl;
 									cout << "\t\t\t";
 									system("pause");
 									return BookMovie(0);
 								}
 							}
 							else
-								cout << "\t\t\tInvalid input detected." << endl;
+								cout << "\t\t\t\033[1;31mInvalid input detected.\033[0m" << endl;
 						} while (booking == "N" || booking != "Y");
 					}
 					else
-						cout << "\t\t\tInvalid showtime detected..." << endl;
+						cout << "\t\t\t\033[1;31mInvalid showtime detected...\033[0m" << endl;
 				}
 			}
 		}
@@ -2728,7 +2735,7 @@ void NumberTicket(int index, int& child, int& adult, int row[], int column[]) {
 					detected++;
 			}
 			if (detected > 0)
-				cout << "\t\t\tcolumn of seat is not available." << endl;
+				cout << "\t\t\t\033[1;31mcolumn of seat is not available.\033[0m" << endl;
 		} while (detected != 0);
 		if (detected == 0) {
 			row[i] = rows;
@@ -2760,13 +2767,13 @@ void MemberChecking(string& checking, int& nomember)
 				if (phone_number == "E")
 					checking = "9998";
 				else if (checking == "9999")
-					cout << "\t\t\tInvalid input detected." << endl;
+					cout << "\t\t\t\033[1;31mInvalid input detected.\033[0m" << endl;
 			} while (checking == "9999");
 		}
 		else if (members == "N")
 			checking = "9999";
 		else
-			cout << "\t\t\tInvalid input detected." << endl;
+			cout << "\t\t\t\033[1;31mInvalid input detected.\033[0m" << endl;
 	} while (!(members == "N" || members == "Y"));
 }
 
