@@ -182,34 +182,41 @@ string upper(string uppercase) {//change string to uppercase
 //CustomerFeedback
 void SearchFeedback() {
 	system("cls");
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t" << text[24][i] << endl;
+	}
 	int nocomment = 0, rating, j = 0, found = 0;
 	double averagerating = 0;
 	OpenCustomerFeedback(nocomment, averagerating);
-	cout << "Enter rating to sort comment (1-5): ";
+	cout << "\n\n\t\t\t\t\t\t\t" << string (150, char(95)) << "\n\n";
+	cout << "\t\t\t\t\t\t\t\t\tEnter rating to sort comment (1-5): ";
 	cin >> rating;
 	cout << endl << endl;
 	if (rating > 0 && rating < 6)
 	{
-		cout << "\t**************************************************************************" << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 		for (int i = 0; i < nocomment; i++)
 		{
 			if (rating == feedback[i].rating)
 			{
 				found = i;
-				cout << "\t\t\t" << ++j << ". Rating: " << feedback[i].rating << endl;
-				cout << "\t\t\tComment: " << feedback[i].comment << endl << endl;
-				cout << "\t**************************************************************************" << endl << endl;
+				cout << "\t\t\t\t\t\t\t\t\t\t\t\t" << ++j << ". Rating: " << feedback[i].rating << endl;
+				cout << "\t\t\t\t\t\t\t\t\t\t\t\tComment: " << feedback[i].comment << endl << endl;
+				cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 			}
 		}
 
 		if (!(rating == feedback[found].rating))
 		{
-			cout << "\t\t\tNo comment with rating of " << rating << ". " << endl << endl;
-			cout << "\t**************************************************************************" << endl << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\t\033[1;91mNo comment with rating of " << rating << ". \033[0m" << endl << endl;
+			cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 		}
 	}
 	else
-		cout << "Invalid input! " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91mInvalid input! \033[0m" << endl;
 	system("PAUSE");
 }
 void OpenCustomerFeedback(int& nocomment, double& averagerating)
@@ -230,7 +237,7 @@ void OpenCustomerFeedback(int& nocomment, double& averagerating)
 		}
 	}
 	else
-		cout << "Please contact admin for further assistance..." << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91mPlease contact admin for further assistance...\033[0m" << endl;
 	for (int i = 0; i < nocomment; i++)
 	{
 		totalrating += feedback[i].rating;
@@ -241,38 +248,51 @@ void OpenCustomerFeedback(int& nocomment, double& averagerating)
 void ViewFeedback()
 {
 	system("cls");
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t" << text[23][i] << endl;
+	}
+	cout << "\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
 	int nocomment = 0, j = 0, totalrating = 0;
 	double averagerating = 0;
 	OpenCustomerFeedback(nocomment, averagerating);
-	cout << "Total comment: " << nocomment << endl;
-	cout << "Average rating: " << fixed << setprecision(1) << averagerating << endl << endl;
-	cout << "\t**************************************************************************" << endl << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tTotal comment: " << nocomment << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tAverage rating: " << fixed << setprecision(1) << averagerating << endl << endl;
+	cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 	for (int i = 0; i < nocomment; i++)
 	{
-		cout << "\t\t\t" << ++j << ". Rating: " << feedback[i].rating << endl;
-		cout << "\t\t\tComment: " << feedback[i].comment << endl << endl;
-		cout << "\t**************************************************************************" << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\t" << ++j << ". Rating: " << feedback[i].rating << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tComment: " << feedback[i].comment << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 	}
 	system("PAUSE");
 }
 void WriteFeedback()
 {
 	system("cls");
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t" << text[22][i] << endl;
+	}
 	char Continue = 'y';
 	int i = 0;
 	ofstream cusfeedback;
 	cusfeedback.open("CustomerFeedback.txt", ios::app);
+	cout << "\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
+	cout << "\t\t\t\t\t\t\t\t\t\033[1;95mGood day! \n\t\t\t\t\t\t\t\t\tThis comment is anonymous. \n\t\t\t\t\t\t\t\t\tPlease feel free to leave your thoughts. \n\n\n\033[0m";
 
-	cout << "Good day! \nThis comment is anonymous. \nPlease feel free to leave your thoughts. \n";
-
-	cout << "\t\t\tPlease rate our cinema (1-5)" << endl << "\t\t\t";
+	cout << "\t\t\t\t\t\t\t\t\tPlease rate our cinema (1-5): ";
 	cin >> feedback[i].rating;
 	cusfeedback << endl << feedback[i].rating << endl;
-	cout << "\t\t\tPlease leave your feedback here. (in 100 words) " << endl << "\t\t\t";
+	cout << "\t\t\t\t\t\t\t\t\tPlease leave your feedback here. (in 100 words) " << endl << "\t\t\t\t\t\t\t\t\t";
 	cin.ignore();
 	getline(cin, feedback[i].comment);
 	cusfeedback << feedback[i].comment;
-	cout << endl << "\t\t\tThank you. " << endl;
+	cout << endl << "\t\t\t\t\t\t\t\t\t\033[1;95mThank you. \033[0m" << endl;
 	system("PAUSE");
 	cusfeedback.close();
 }
@@ -284,11 +304,18 @@ void CustomerFeedback()
 	do
 	{
 		system("cls");
-		cout << "<1> Leave comment " << endl;
-		cout << "<2> View comment " << endl;
-		cout << "<3> Search comment " << endl;
-		cout << "<4> Exit " << endl;
-		cout << "\t\t\tPlease input your selection >>> ";
+		ReadTextRecord(0);
+		cout << "\n\n\033[1;96m" << endl;
+		for (int i = 0; i < 7; i++)
+		{
+			cout << "\t\t\t\t\t\t\t\t" << text[23][i] << endl;
+		}
+		cout << "\033[0m\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
+		cout << "\t\t\t\t\t\t\t\t\t<1> Leave comment " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<2> View comment " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<3> Search comment " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<4> Exit \n\n" << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;34mPlease input your selection >>> \033[0m";
 		cin >> selection;
 		switch (selection)
 		{
@@ -314,7 +341,7 @@ void CustomerFeedback()
 		}
 		default://reinput
 		{
-			cout << "\t\t\tInvalid input found" << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\033[1;91mInvalid input! \033[0m" << endl;
 			break;
 		}
 		}
@@ -418,7 +445,7 @@ void OpenPurchaseHistory() {
 		}
 	}
 	else
-		cout << "Please contact admin for further assistance..." << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91mPlease contact admin for further assistance...\033[0m" << endl;
 	Ad_purchase.close();
 }
 void OpenMemberDetails(int& nomember) {
@@ -440,38 +467,37 @@ void OpenMemberDetails(int& nomember) {
 		}
 	}
 	else
-		cout << "Please contact admin for further assistance..." << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91mPlease contact admin for further assistance...\033[0m" << endl;
 	Ad_memberlist.close();
 }
 void ViewMemberDetails(int& need)
 {
 	int nomember = 0;
-	cout << "\t**************************************************************************" << endl << endl;
-	cout << "\t\t\tUsername: " << Member[need].Details_user << endl;
-	cout << "\t\t\tPassword: " << Member[need].Details_password << endl;
-	cout << "\t\t\tName: " << Member[need].Details_name << endl;
-	cout << "\t\t\tStatus: " << Member[need].Details_status << endl;
-	cout << "\t\t\tJoin date: " << Member[need].Details_join << endl;
-	cout << "\t\t\tAccumulated point(s): " << Member[need].Details_point << endl;
-	cout << "\t\t\tPhone number: " << Member[need].Details_phone << endl;
-	cout << "\t\t\tEmail address: " << Member[need].Details_email << endl << endl;
-	cout << "\t**************************************************************************" << endl << endl;
+	cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tUsername: " << Member[need].Details_user << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tPassword: " << Member[need].Details_password << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tName: " << Member[need].Details_name << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tStatus: " << Member[need].Details_status << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tJoin date: " << Member[need].Details_join << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tAccumulated point(s): " << Member[need].Details_point << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tPhone number: " << Member[need].Details_phone << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tEmail address: " << Member[need].Details_email << endl << endl;
+	cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 }
 void ViewPurchaseHistory(int& need)
 {
 	OpenPurchaseHistory();
-	cout << "\t**************************************************************************" << endl << endl;
-	cout << "\t\t\tUsername: " << Purchase[need].Purchase_user << endl;
-	cout << "\t\t\tName: " << Purchase[need].Purchase_name << endl << endl;
+	cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tUsername: " << Purchase[need].Purchase_user << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tName: " << Purchase[need].Purchase_name << endl << endl;
 	for (int i = 0; i < 5; i++)
 	{
-		cout << "\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[need].Purchase_date[i] << endl;
-		cout << "\t\t\tNumber of pax (Child Adult): " << Purchase[need].Purchase_pax[i] << endl;
-		cout << "\t\t\tMovie: " << Purchase[need].Purchase_movie[i] << endl;
-		cout << "\t\t\tF&B: " << Purchase[need].Purchase_food[i] << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[need].Purchase_date[i] << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tNumber of pax (Child Adult): " << Purchase[need].Purchase_pax[i] << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tMovie: " << Purchase[need].Purchase_movie[i] << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tF&B: " << Purchase[need].Purchase_food[i] << endl << endl;
 	}
-	cout << "\t**************************************************************************" << endl << endl;
-
+	cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 }
 //Membership Details (for user)
 void UserRegister() {//add new member
@@ -480,10 +506,17 @@ void UserRegister() {//add new member
 	string username, password;
 
 	system("cls");
-	cout << "Good day!\nWelcome to be part of us!\n\n";
-	cout << "\t\t\tKindly fill in the below information. \n";
-	cout << "\t\t\t*Compulsory\n\n";
-	cout << "\t\t\t*Username: ";
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t" << text[15][i] << endl;
+	}
+	cout << "\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
+	cout << "\t\t\t\t\t\t\t\t\t\033[1;95mGood day!\n\t\t\t\t\t\t\t\t\tWelcome to be part of us!\n\n";
+	cout << "\t\t\t\t\t\t\t\t\tKindly fill in the below information. \033[0m\n";
+	cout << "\t\t\t\t\t\t\t\t\t\033[1;91m*Compulsory\n\n";
+	cout << "\t\t\t\t\t\t\t\t\t*Username: \033[0m";
 	cin.ignore();
 	getline(cin, username);
 
@@ -500,37 +533,37 @@ void UserRegister() {//add new member
 	if (!(upper(username) == upper(Member[existing].Details_user)))
 	{
 		Member[newmember].Details_user = username;
-		cout << "\t\t\t*Full name as per NRIC: ";
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91m*Full name as per NRIC: \033[0m";
 		getline(cin, Member[newmember].Details_name);
 		Member[newmember].Details_status = "Classic";
-		cout << "\t\t\t*Password: ";
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91m*Password: \033[0m";
 		getline(cin, Member[newmember].Details_password);
-		cout << "\t\t\t*Register date (DD MM YYYY): ";
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91m*Register date (DD MM YYYY): \033[0m";
 		getline(cin, Member[newmember].Details_join);
 		Member[newmember].Details_point = "0";
-		cout << "\t\t\t*Phone number: ";
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91m*Phone number: \033[0m";
 		getline(cin, Member[newmember].Details_phone);
-		cout << "\t\t\t*Email: ";
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91m*Email: \033[0m";
 		getline(cin, Member[newmember].Details_email);
-		cout << "\n\t\t\tCongratulations!\n\t\t\tYour registration was successful!\n\t\t\tKindly log in to access more.\n\t\t\tThank you ^^\n";
+		cout << "\n\t\t\t\t\t\t\t\t\t\033[1;92mCongratulations!\n\t\t\t\t\t\t\t\t\tYour registration was successful!\n\t\t\t\t\t\t\t\t\tKindly log in to access more.\n\t\t\t\t\t\t\t\t\tThank you ^^\n\033[0m";
 		system("PAUSE");
 	}
 	else if (upper(username) == upper(Member[existing].Details_user))
 	{
-		cout << "\t\t\tRegistered member!\n\t\t\tPlease log in to access your account.\n";
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91mRegistered member!\n\t\t\t\t\t\t\t\t\tPlease log in to access your account.\n\033[0m";
 		system("PAUSE");
 	}
 
 	Add_member.open("Admin_memberlist.txt", ios::app);
 	{
-		Add_member << Member[newmember].Details_user << endl;;
+		Add_member << endl << Member[newmember].Details_user << endl;;
 		Add_member << Member[newmember].Details_password << endl;
 		Add_member << Member[newmember].Details_name << endl;
 		Add_member << Member[newmember].Details_status << endl;
 		Add_member << Member[newmember].Details_join << endl;
 		Add_member << Member[newmember].Details_point << endl;
 		Add_member << Member[newmember].Details_phone << endl;
-		Add_member << Member[newmember].Details_email << endl;
+		Add_member << Member[newmember].Details_email;
 	}
 	Add_member.close();
 
@@ -557,10 +590,17 @@ void UserLogIn() //for existing member
 	int i = 0, found = 0;
 	string username, password;
 	system("cls");
-	cout << "Good day! " << endl;
-	cout << "Kindly log in for more access. " << endl << endl;
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t\t" << text[14][i] << endl;
+	}
+	cout << "\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
+	cout << "\t\t\t\t\t\t\t\t\t\033[1;95mGood day! " << endl;
+	cout << "\t\t\t\t\t\t\t\t\tKindly log in for more access. \033[0m" << endl << endl;
 
-	cout << "\t\t\tPlease enter your username: ";
+	cout << "\t\t\t\t\t\t\t\t\tPlease enter your username: ";
 	cin >> username;
 
 	OpenMemberDetails(nomember);
@@ -572,23 +612,29 @@ void UserLogIn() //for existing member
 	OpenPurchaseHistory();
 	if (upper(username) == upper(Member[found].Details_user))
 	{
-		cout << "\t\t\tPlease enter your password: ";
+		cout << "\t\t\t\t\t\t\t\t\tPlease enter your password: ";
 		cin >> password;
 		if (password == Member[found].Details_password)
 		{
 			do {
 				system("cls");
-				cout << "Welcome back, our beloved member! " << endl;
-				cout << "<1> Profile" << endl;
-				cout << "<2> Purchase history" << endl;
-				cout << "<3> Exit" << endl;
-
-				cout << "\t\t\tPlease input your selection >>> ";
+				cout << "\t\t\t\t\t\t\t\t\t\033[1;95mWelcome back, our beloved member! \033[0m" << endl;
+				cout << "\t\t\t\t\t\t\t\t\t<1> Profile" << endl;
+				cout << "\t\t\t\t\t\t\t\t\t<2> Purchase history" << endl;
+				cout << "\t\t\t\t\t\t\t\t\t<3> Exit \n\n" << endl;
+				cout << "\t\t\t\t\t\t\t\t\t\033[1;34mPlease input your selection >>> \033[0m";
 				cin >> selection;
 				switch (selection) {
 				case(1)://Check personal details
 				{
 					system("cls");
+					ReadTextRecord(0);
+					cout << "\n\n" << endl;
+					for (int i = 0; i < 7; i++)
+					{
+						cout << "\t\t\t\t\t\t\t\t\t\t" << text[17][i] << endl;
+					}
+					cout << endl << endl;
 					ViewMemberDetails(found);
 					system("PAUSE");
 					break;
@@ -596,6 +642,13 @@ void UserLogIn() //for existing member
 				case(2)://Check purchase history
 				{
 					system("cls");
+					ReadTextRecord(0);
+					cout << "\n\n" << endl;
+					for (int i = 0; i < 7; i++)
+					{
+						cout << "\t\t\t\t\t\t\t\t\t" << text[16][i] << endl;
+					}
+					cout << endl << endl;
 					ViewPurchaseHistory(found);
 					system("PAUSE");
 					break;
@@ -607,17 +660,17 @@ void UserLogIn() //for existing member
 				}
 				default://reinput
 				{
-					cout << "\t\t\tInvalid input found" << endl;
+					cout << "\t\t\t\t\t\t\t\t\t\033[1;91mInvalid input! \033[0m" << endl;
 					break;
 				}
 				}
 			} while (decision);
 		}
 		else
-			cout << "\t\t\tInvalid password!\n\t\t\tPlease contact admin to reset password. " << endl;
+			cout << "\033[1;91m\t\t\t\t\t\t\t\t\tInvalid password!\n\t\t\t\t\t\t\t\t\tPlease contact admin to reset password. \033[0m" << endl;
 	}
 	else if (!(upper(username) == upper(Member[found].Details_user)))
-		cout << "\t\t\tMember doesn't exist! \n";
+		cout << "\033[1;91m\t\t\t\t\t\t\t\t\tMember doesn't exist! \n\033[0m";
 
 	system("PAUSE");
 }
@@ -628,11 +681,17 @@ void MembershipDetails() //membership details menu
 	system("cls");
 	do {
 		system("cls");
-		cout << "<1> Log in" << endl;
-		cout << "<2> Register" << endl;
-		cout << "<3> Exit" << endl;
-
-		cout << "\t\t\tPlease input your selection >>> ";
+		ReadTextRecord(0);
+		cout << "\n\n\033[1;96m" << endl;
+		for (int i = 0; i < 7; i++)
+		{
+			cout << "\t\t\t\t\t\t\t\t" << text[12][i] << endl;
+		}
+		cout << "\033[0m\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
+		cout << "\t\t\t\t\t\t\t\t\t<1> Log in" << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<2> Register" << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<3> Exit \n\n" << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;34mPlease input your selection >>> \033[0m";
 		cin >> selection;
 		switch (selection)
 		{
@@ -653,7 +712,7 @@ void MembershipDetails() //membership details menu
 		}
 		default://reinput
 		{
-			cout << "\t\t\tInvalid input found" << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\033[1;91mInvalid input! \033[0m" << endl;
 			break;
 		}
 		}
@@ -704,20 +763,27 @@ void UpdatedMember(int& update) //show updated info
 	int nomember = 0;
 
 	system("cls");
-	cout << "\t\t\tUpdated Details " << endl << endl;
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\033[1;92mUpdated Details \033[0m" << endl << endl;
 	ViewMemberDetails(update);
 	system("PAUSE");
 }
 void Admin_DeleteMember() //delete expired member
 {
 	system("cls");
+	ReadTextRecord(0);
+	cout << "\n\n\t\t\t" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t\t\t" << text[19][i] << endl;
+	}
+	cout << "\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
 	int nomember = 0, dlt = 0;
 	string username;
 	char choice = 'y';
 	OpenMemberDetails(nomember);
 	OpenPurchaseHistory();
 
-	cout << "Enter member's username: ";
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tEnter member's username: ";
 	cin.ignore();
 	getline(cin, username);
 	cout << endl << endl;
@@ -730,11 +796,11 @@ void Admin_DeleteMember() //delete expired member
 	{
 		ViewMemberDetails(dlt);
 		ViewPurchaseHistory(dlt);
-		cout << "\t\t\tDo you sure to remove this member? (Y/N): ";
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\t\033[1;34mDo you sure to remove this member? (Y/N): \033[0m";
 		cin >> choice;
 		if (toupper(choice) == toupper('y'))
 		{
-			cout << "\t\t\tMember deleted successfully. " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\t\033[1;92mMember deleted successfully. \033[0m" << endl;
 			for (int i = dlt; i < nomember; i++)
 			{
 				Member[i].Details_user = Member[i + 1].Details_user;
@@ -761,7 +827,7 @@ void Admin_DeleteMember() //delete expired member
 		}
 	}
 	else
-		cout << "Member doesn't exist! " << endl;
+		cout << "\033[1;91m\t\t\t\t\t\t\t\t\tMember doesn't exist! \033[0m" << endl;
 	WriteMemberDetails(nomember);
 	WritePurchaseHistory(nomember);
 	system("PAUSE");
@@ -769,6 +835,13 @@ void Admin_DeleteMember() //delete expired member
 void Admin_UpdateMember() //update specific info
 {
 	system("cls");
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t" << text[25][i] << endl;
+	}
+	cout << "\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
 	string search;
 	bool decision = true;
 	ifstream Ad_memberlist;
@@ -776,11 +849,10 @@ void Admin_UpdateMember() //update specific info
 	OpenMemberDetails(nomember);
 	OpenPurchaseHistory();
 
-	cout << "Enter member's username: ";
+	cout << "\t\t\t\t\t\t\t\t\t\t\t\tEnter member's username: ";
 	cin.ignore();
 	getline(cin, search);
 	cout << endl << endl;
-
 	for (int j = 0; j < nomember; j++)
 	{
 		if (upper(search) == upper(Member[j].Details_user))
@@ -791,24 +863,24 @@ void Admin_UpdateMember() //update specific info
 		do
 		{
 			system("cls");
-			cout << "<1> Name" << endl;
-			cout << "<2> Status " << endl;
-			cout << "<3> Username " << endl;
-			cout << "<4> Password " << endl;
-			cout << "<5> Join date " << endl;
-			cout << "<6> Phone number " << endl;
-			cout << "<7> Email address " << endl;
-			cout << "<8> Accumulated point " << endl;
-			cout << "<9> Exit " << endl;
-			cout << "\t\t\tPlease input your selection >>> ";
+			cout << "\t\t\t\t\t\t\t\t\t<1> Name" << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<2> Status " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<3> Username " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<4> Password " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<5> Join date " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<6> Phone number " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<7> Email address " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<8> Accumulated point " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<9> Exit \n\n" << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\033[1;34mPlease input your selection >>> \033[0m";
 			cin >> selection;
 			switch (selection)
 			{
 			case(1)://New name
 			{
 				system("cls");
-				cout << "\t\t\tCurrent name: " << Member[update].Details_name << endl;
-				cout << "\t\t\tEnter new name: ";
+				cout << "\t\t\t\t\t\t\t\t\tCurrent name: " << Member[update].Details_name << endl;
+				cout << "\t\t\t\t\t\t\t\t\tEnter new name: ";
 				cin.ignore();
 				getline(cin, Member[update].Details_name);
 				Purchase[update].Purchase_name = Member[update].Details_name;
@@ -818,8 +890,8 @@ void Admin_UpdateMember() //update specific info
 			case(2)://New status
 			{
 				system("cls");
-				cout << "\t\t\tCurrent status: " << Member[update].Details_status << endl;
-				cout << "\t\t\tEnter new status: ";
+				cout << "\t\t\t\t\t\t\t\t\tCurrent status: " << Member[update].Details_status << endl;
+				cout << "\t\t\t\t\t\t\t\t\tEnter new status: ";
 				cin.ignore();
 				getline(cin, Member[update].Details_status);
 				UpdatedMember(update);
@@ -828,8 +900,8 @@ void Admin_UpdateMember() //update specific info
 			case(3)://New username
 			{
 				system("cls");
-				cout << "\t\t\tCurrent username: " << Member[update].Details_user << endl;
-				cout << "\t\t\tEnter new username: ";
+				cout << "\t\t\t\t\t\t\t\t\tCurrent username: " << Member[update].Details_user << endl;
+				cout << "\t\t\t\t\t\t\t\t\tEnter new username: ";
 				cin.ignore();
 				getline(cin, Member[update].Details_user);
 				Purchase[update].Purchase_user = Member[update].Details_user;
@@ -839,8 +911,8 @@ void Admin_UpdateMember() //update specific info
 			case(4)://New password
 			{
 				system("cls");
-				cout << "\t\t\tCurrent password: " << Member[update].Details_password << endl;
-				cout << "\t\t\tEnter new password: ";
+				cout << "\t\t\t\t\t\t\t\t\tCurrent password: " << Member[update].Details_password << endl;
+				cout << "\t\t\t\t\t\t\t\t\tEnter new password: ";
 				cin.ignore();
 				getline(cin, Member[update].Details_password);
 				UpdatedMember(update);
@@ -849,8 +921,8 @@ void Admin_UpdateMember() //update specific info
 			case(5)://New join date
 			{
 				system("cls");
-				cout << "\t\t\tCurrent join date: " << Member[update].Details_join << endl;
-				cout << "\t\t\tEnter new join date: ";
+				cout << "\t\t\t\t\t\t\t\t\tCurrent join date: " << Member[update].Details_join << endl;
+				cout << "\t\t\t\t\t\t\t\t\tEnter new join date: ";
 				cin.ignore();
 				getline(cin, Member[update].Details_join);
 				UpdatedMember(update);
@@ -859,8 +931,8 @@ void Admin_UpdateMember() //update specific info
 			case(6)://New phone number
 			{
 				system("cls");
-				cout << "\t\t\tCurrent phone number: " << Member[update].Details_phone << endl;
-				cout << "\t\t\tEnter new phone number: ";
+				cout << "\t\t\t\t\t\t\t\t\tCurrent phone number: " << Member[update].Details_phone << endl;
+				cout << "\t\t\t\t\t\t\t\t\tEnter new phone number: ";
 				cin.ignore();
 				getline(cin, Member[update].Details_phone);
 				UpdatedMember(update);
@@ -869,8 +941,8 @@ void Admin_UpdateMember() //update specific info
 			case(7)://New email address
 			{
 				system("cls");
-				cout << "\t\t\tCurrent email address: " << Member[update].Details_email << endl;
-				cout << "\t\t\tEnter new email address: ";
+				cout << "\t\t\t\t\t\t\t\t\tCurrent email address: " << Member[update].Details_email << endl;
+				cout << "\t\t\t\t\t\t\t\t\tEnter new email address: ";
 				cin.ignore();
 				getline(cin, Member[update].Details_email);
 				UpdatedMember(update);
@@ -879,8 +951,8 @@ void Admin_UpdateMember() //update specific info
 			case(8)://New accumulated point
 			{
 				system("cls");
-				cout << "\t\t\tCurrent accumulated point(s): " << Member[update].Details_point << endl;
-				cout << "\t\t\tEnter new accumulated point(s): ";
+				cout << "\t\t\t\t\t\t\t\t\tCurrent accumulated point(s): " << Member[update].Details_point << endl;
+				cout << "\t\t\t\t\t\t\t\t\tEnter new accumulated point(s): ";
 				cin.ignore();
 				getline(cin, Member[update].Details_point);
 				UpdatedMember(update);
@@ -893,7 +965,7 @@ void Admin_UpdateMember() //update specific info
 			}
 			default://reinput
 			{
-				cout << "\t\t\tInvalid input found" << endl;
+				cout << "\t\t\t\t\t\t\t\t\t\033[1;91mInvalid input! \033[0m" << endl;
 				break;
 			}
 			}
@@ -902,19 +974,26 @@ void Admin_UpdateMember() //update specific info
 		WritePurchaseHistory(nomember);
 	}
 	else
-		cout << "Member doesn't exist! " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91mMember doesn't exist! \033[0m" << endl;
 	system("PAUSE");
 }
 void Admin_SearchMember() //search for specific member
 {
 	system("cls");
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t\t\t" << text[18][i] << endl;
+	}
+	cout << "\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
 	string search;
 	bool decision = true;
 	int i = 0, j = 0, nomember = 0, found = 0, selection;
 	OpenMemberDetails(nomember);
 	OpenPurchaseHistory();
 
-	cout << "Enter member's username: ";
+	cout << "\t\t\t\t\t\t\t\t\tEnter member's username: ";
 	cin.ignore();
 	getline(cin, search);
 	cout << endl << endl;
@@ -929,16 +1008,23 @@ void Admin_SearchMember() //search for specific member
 		do
 		{
 			system("cls");
-			cout << "<1> Member details " << endl;
-			cout << "<2> Member purchase history " << endl;
-			cout << "<3> Exit " << endl;
-			cout << "\t\t\tPlease input your selection >>> ";
+			cout << "\t\t\t\t\t\t\t\t\t<1> Member details " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<2> Member purchase history " << endl;
+			cout << "\t\t\t\t\t\t\t\t\t<3> Exit \n\n" << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\033[1;34mPlease input your selection >>> \033[0m";
 			cin >> selection;
 			switch (selection)
 			{
 			case(1)://Member personal info
 			{
 				system("cls");
+				ReadTextRecord(0);
+				cout << "\n\n" << endl;
+				for (int i = 0; i < 7; i++)
+				{
+					cout << "\t\t\t\t\t\t\t\t\t\t" << text[17][i] << endl;
+				}
+				cout << "\n\n";
 				ViewMemberDetails(found);
 				system("PAUSE");
 				break;
@@ -946,6 +1032,13 @@ void Admin_SearchMember() //search for specific member
 			case(2)://Member Purchase history (Only store 5 latest history)
 			{
 				system("cls");
+				ReadTextRecord(0);
+				cout << "\n\n" << endl;
+				for (int i = 0; i < 7; i++)
+				{
+					cout << "\t\t\t\t\t\t\t\t\t" << text[16][i] << endl;
+				}
+				cout << "\n\n";
 				ViewPurchaseHistory(found);
 				system("PAUSE");
 				break;
@@ -957,57 +1050,69 @@ void Admin_SearchMember() //search for specific member
 			}
 			default://reinput
 			{
-				cout << "\t\t\tInvalid input found" << endl;
+				cout << "\t\t\t\t\t\t\t\t\t\033[1;91mInvalid input! \033[0m" << endl;
 				break;
 			}
 			}
 		} while (decision);
 	}
 	else if (!(upper(search) == upper(Member[found].Details_user)))
-		cout << "Member doesn't exist! " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;91mMember doesn't exist! \033[0m" << endl;
 	system("PAUSE");
 }
 void Admin_PurchaseHistory() //Members' purchase history (Only store 5 latest history)
 {
 	system("cls");
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t\t" << text[16][i] << endl;
+	}
 	int nomember = 0;
 	OpenMemberDetails(nomember);
 	OpenPurchaseHistory();
 
-	cout << "\t**************************************************************************" << endl << endl;
+	cout << "\n\n\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 
 	for (int j = 0; j < nomember; j++)
 	{
-		cout << "\t\t\tUsername: " << Purchase[j].Purchase_user << endl;
-		cout << "\t\t\tName: " << Purchase[j].Purchase_name << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tUsername: " << Purchase[j].Purchase_user << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tName: " << Purchase[j].Purchase_name << endl << endl;
 		for (int i = 0; i < 5; i++)
 		{
-			cout << "\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[j].Purchase_date[i] << endl;
-			cout << "\t\t\tNumber of pax (Child Adult): " << Purchase[j].Purchase_pax[i] << endl;
-			cout << "\t\t\tMovie: " << Purchase[j].Purchase_movie[i] << endl;
-			cout << "\t\t\tF&B: " << Purchase[j].Purchase_food[i] << endl << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\t" << i + 1 << ". Purchase Date: " << Purchase[j].Purchase_date[i] << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\tNumber of pax (Child Adult): " << Purchase[j].Purchase_pax[i] << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\tMovie: " << Purchase[j].Purchase_movie[i] << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\t\t\tF&B: " << Purchase[j].Purchase_food[i] << endl << endl;
 		}
-		cout << "\t**************************************************************************" << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 	}
 	system("PAUSE");
 }
 
 void Admin_MemberDetails() { //All members' info
 	system("cls");
+	ReadTextRecord(0);
+	cout << "\n\n" << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << "\t\t\t\t\t\t\t\t\t\t" << text[17][i] << endl;
+	}
 	int nomember = 0;
 	OpenMemberDetails(nomember);
-	cout << "\t**************************************************************************" << endl << endl;
+	cout << "\n\n\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 	for (int i = 0; i < nomember; i++)
 	{
-		cout << "\t\t\t" << i + 1 << ". Username: " << Member[i].Details_user << endl;
-		cout << "\t\t\tPassword: " << Member[i].Details_password << endl;
-		cout << "\t\t\tName: " << Member[i].Details_name << endl;
-		cout << "\t\t\tStatus: " << Member[i].Details_status << endl;
-		cout << "\t\t\tJoin date: " << Member[i].Details_join << endl;
-		cout << "\t\t\tAccumulated point(s): " << Member[i].Details_point << endl;
-		cout << "\t\t\tPhone number: " << Member[i].Details_phone << endl;
-		cout << "\t\t\tEmail address: " << Member[i].Details_email << endl << endl;
-		cout << "\t**************************************************************************" << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\t" << i + 1 << ". Username: " << Member[i].Details_user << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPassword: " << Member[i].Details_password << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tName: " << Member[i].Details_name << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tStatus: " << Member[i].Details_status << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tJoin date: " << Member[i].Details_join << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tAccumulated point(s): " << Member[i].Details_point << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tPhone number: " << Member[i].Details_phone << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t\t\tEmail address: " << Member[i].Details_email << endl << endl;
+		cout << "\t\t\t\t\t\t\t\t\033[5;93m******************************************************************************************************************************************\033[0m" << endl << endl;
 	}
 	system("PAUSE");
 }
@@ -1017,13 +1122,20 @@ void MembershipManagement() {
 	bool decision = true;
 	do {
 		system("cls");
-		cout << "<1> Member details " << endl;
-		cout << "<2> Member purchase history " << endl;
-		cout << "<3> Search member " << endl;
-		cout << "<4> Delete member " << endl;
-		cout << "<5> Update member " << endl;
-		cout << "<6> Exit " << endl;
-		cout << "\t\t\tPlease input your selection >>> ";
+		ReadTextRecord(0);
+		cout << "\n\n\033[1;96m" << endl;
+		for (int i = 0; i < 7; i++)
+		{
+			cout << "\t\t\t\t\t\t\t\t\t\t\t" << text[13][i] << endl;
+		}
+		cout << "\033[0m\n\n\t\t\t\t\t\t\t" << string(150, char(95)) << "\n\n";
+		cout << "\t\t\t\t\t\t\t\t\t<1> Member details " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<2> Member purchase history " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<3> Search member " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<4> Delete member " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<5> Update member " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t<6> Exit \n\n" << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\033[1;34mPlease input your selection >>> \033[0m";
 		cin >> selection;
 		switch (selection)
 		{
@@ -1059,7 +1171,7 @@ void MembershipManagement() {
 		}
 		default://reinput
 		{
-			cout << "\t\t\tInvalid input found" << endl;
+			cout << "\t\t\t\t\t\t\t\t\t\033[1;91mInvalid input! \033[0m" << endl;
 			break;
 		}
 		}
@@ -3252,7 +3364,7 @@ void ReadTextRecord(int record) {
 		cout << "unable to open the file" << endl;
 	else {
 		while (!infile.eof()) {
-			for (int i = 0; i < 22; i++) {
+			for (int i = 0; i < 26; i++) {
 				for (int j = 0; j < 7; j++) {
 					getline(infile, text[i][j]);
 				}
