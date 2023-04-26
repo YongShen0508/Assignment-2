@@ -2462,10 +2462,10 @@ void PurchaseNow(int option){
 			cout << "\t\t\t\t\t" << text[7][i] << endl;
 		}
 		cout << "\n\t\t\t\t" << string(150, char(95)) << endl;
-		cout << "\t\t\t\t<1> Book a movie UwU " << endl;
-		cout << "\t\t\t\t<2> Food & Beverages UnU" << endl;
-		cout << "\t\t\t\t<3> Exit " << "\n\t\t\t\t" << string(150, char(95)) << endl;
-		cout << "\n\t\t\t\tInput your selection >>> ";
+		cout << "\n\t\t\t\t\t\t<1> Book a movie UwU " << endl;
+		cout << "\t\t\t\t\t\t<2> Food & Beverages UnU" << endl;
+		cout << "\t\t\t\t\t\t<3> Exit " << "\n\n\t\t\t\t" << string(150, char(95)) << endl;
+		cout << "\n\t\t\t\t\t\tInput your selection >>> ";
 		getline(cin, selection);
 		if (selection == "1")//book  movie
 			BookMovie(1);
@@ -2474,7 +2474,7 @@ void PurchaseNow(int option){
 		else if (selection == "3")
 			decision = false;
 		else{
-			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
+			cout << "\t\t\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
 			Sleep(600);
 		}
 	} while (decision);
@@ -2518,6 +2518,7 @@ void BookMovie(int option)
 		cout << "\t\t\tInput the keyword to search the movie <E>xit >>>";
 		getline(cin, keyword);
 		Sleep(400);
+		system("pause");
 		keyword = upper(keyword);
 		for (int i = 0; i < record; i++) {
 			if (movie[i].movie_name.find(keyword) != string::npos) {//keyword checking process
@@ -2588,8 +2589,9 @@ void BookMovie(int option)
 							cout << "\t\t\tMovie Time: " << movie[index].movie_time << endl;
 							cout << "\t\t\tMovie Length H.MM: " << fixed << setprecision(2) << movie[index].movie_length << endl;
 							cout << "\t\t\tMovie Hall: " << movie[index].movie_hall << endl;
-							cout << "\t\t\tAre this movie you want to book <Y>es <N>o <E>xit >> >";
+							cout << "\t\t\t\033[1;32mAre this movie you want to book <Y>es <N>o>> >";
 							getline(cin, booking);
+							cout << "\033[0m";
 							booking = upper(booking);
 							string final;
 							int row[25];
