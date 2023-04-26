@@ -2132,8 +2132,7 @@ void LoadEmployeeRecord(int& record)
 	}
 	details.close();
 }
-void AddEmployee(int& record)
-{
+void AddEmployee(int& record){
 	bool decision = true;
 	do {
 		char confirms;
@@ -2164,8 +2163,7 @@ void AddEmployee(int& record)
 		char conts;
 		do {
 			int number;
-			for (int i = 0; i < sizeof(department) / sizeof(string); i++)//display department
-			{
+			for (int i = 0; i < sizeof(department) / sizeof(string); i++){//display department
 				cout << "\t\t\t<" << i + 1 << "> " << department[i] << endl;
 
 			}
@@ -2173,7 +2171,7 @@ void AddEmployee(int& record)
 			cin >> number;
 			employee_department = department[number - 1];
 			cout << "\t\t\tThis employee under deparment of " << employee_department << endl;
-			cout << "\t\t\tEmployee department confirmation <Y>es <N>o >>> ";
+			cout << "\t\t\tEmployee department confirmation <Y>es to continue... >>> ";
 			cin >> conts;
 			conts = toupper(conts);
 		} while (!(conts == 'Y'));
@@ -2185,7 +2183,7 @@ void AddEmployee(int& record)
 			getline(cin, employee_position);
 			employee_position = upper(employee_position);
 			cout << "\t\t\tHer/His position is " << employee_position << endl;
-			cout << "\t\t\tEmployee position confirmation <Y>es <N>o >>> ";
+			cout << "\t\t\tEmployee position confirmation <Y>es to continue... >>> ";
 			cin >> resume;
 			resume = toupper(resume);
 		} while (!(resume == 'Y'));
@@ -2195,13 +2193,11 @@ void AddEmployee(int& record)
 			int number[4] = { 10000,20000,30000,40000 };
 			int index = rand() % 4; //index=(0,1,2,3)
 			int value = number[index] + rand() % 10000;//10000+XXXX
-			for (int i = 0; i < record; i++)
-			{
+			for (int i = 0; i < record; i++){
 				if (value == employee[i].password)
 					found++;
 			}
-			if (found == 0)
-			{
+			if (found == 0){
 				password = value;//password will be assigned automatically
 				check = false;
 			}
@@ -2211,8 +2207,7 @@ void AddEmployee(int& record)
 			cout << "\t\t\tFinal confirmation <Y>es <N>o >>>";
 			cin >> confirms;
 			confirms = toupper(confirms);
-			if (confirms == 'Y')
-			{
+			if (confirms == 'Y'){
 				cout << "\t\t\tSuccessfully added employee named " << employee_name << "," << employee_id << endl;
 				employee[record].id = employee_id;
 				employee[record].name = employee_name;
@@ -2223,10 +2218,9 @@ void AddEmployee(int& record)
 				LoadEmployeeRecord(record);
 				decision = false;
 			}
-			else if (confirms == 'N')
-			{
+			else if (confirms == 'N'){
 				cout << "\t\t\tPending exit to employee page." << endl;
-				Sleep(20);
+				Sleep(500);
 				decision = false;
 			}
 		} while (!(confirms == 'Y' || confirms == 'N'));
