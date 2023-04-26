@@ -3331,7 +3331,7 @@ void purchaseFB(int option)
 		foodname[checker] = FNB[choice - 1].foodname;
 		total_quantity[checker] = quantity;
 		total += price;
-		point = int(total);//must be in integer ohh
+		point = int(total);
 
 		FNB[choice - 1].stock -= quantity;
 		LoadFBRecord(fbrecord);
