@@ -2975,11 +2975,12 @@ void deleteFB(int option)
 void inventoryFB(int option)
 {
 	ReadTextRecord(0);
+	cout<<"\033[1;96m";
 	for (int i = 0; i < 7; i++)
 	{
 		cout << "\t\t\t\t\t\t\t\t" << text[8][i] << endl;
 	}
-	cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+	cout << "\033[0m\n\n\t\t\t" << string(150, char(95)) << endl;
 	int fbrecord = 0;
 	ReadFBRecord(fbrecord);
 	//let users to select whether to add or delete stock
@@ -3114,11 +3115,12 @@ void LoadFBRecord(int& fbrecord)
 void purchaseFB(int option)
 {
 	ReadTextRecord(0);
+	cout<<"\033[1;96m";
 	for (int i = 0; i < 7; i++)
 	{
 		cout << "\t\t\t\t\t\t\t\t" << text[11][i] << endl;
 	}
-	cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+	cout << "\033[0m\n\n\t\t\t" << string(150, char(95)) << endl;
 	int fbrecord = 0;
 	ReadFBRecord(fbrecord);
 	string checking = "9999";
