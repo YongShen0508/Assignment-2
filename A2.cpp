@@ -1206,48 +1206,28 @@ void CinemaManagement(int option) {
 	} while (decision);
 }
 //Cinema Hall Management
-void CinemaHallManagement(int option) {
+void CinemaManagement(int option) {
+	cin.clear();
 	string selection;
 	bool decision = true;
 	do {
 		system("cls");
-		int record = 0;
-		bool result = false;
+		cout << "\n\n" << endl;
 		for (int i = 0; i < 7; i++) {
-			cout << "\t\t\t\t\t\t\t\t" << text[5][i] << endl;
+			cout << "\t\t\t\t" << text[3][i] << endl;
 		}
-		ReadCinemaHallRecord(record);
-		cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
-		for (int w = 0; w < record; w++) {
-			cout << "\n\n\t\t\t\t HALL " << unavailable[w].hall << "\n\n";
-			CinemaSeatPrinting(w, 99);
-		}
-		cin.clear();
-		cout << "\t\t\t" << string(150, char(95)) << endl;
-		cout << "\t\t\t<1> Add Cinema Hall" << endl;
-		cout << "\t\t\t<2> Modify Cinema Hall space" << endl;
-		cout << "\t\t\t<3> Delete Cinema Hall" << endl;
-		cout << "\t\t\t<4> Exit" << endl;
-		cout << "\t\t\t" << string(150, char(95)) << endl;
-		cout << "\t\t\tInput your selection >>> ";
+		cout << "\n\t\t\t" << string(150, char(95)) << endl;
+		cout << "\n\n\n\t\t\t<1> Movies management " << endl;
+		cout << "\t\t\t<2> Cinema Hall management " << endl;
+		cout << "\t\t\t<3> Exit " << endl;
+		cout << "\n\t\t\t" << string(150, char(95)) << endl;
+		cout << "\t\t\tPlease input your selection >>> ";
 		getline(cin, selection);
-		//Add cinema Hall
-		if (selection == "1") {
-			result = AddCinemaHall(result);
-			if (result) {
-				record++;
-				unavailable[record - 1].hall = record;
-				unavailable[record - 1].data = 0;
-				unavailable[record - 1].row[0] = 0;
-				unavailable[record - 1].column[0] = 0;
-				LoadCinemaHallRecord(record);
-			}
-		}
-		else if (selection == "2")//Modify Cinema Seat
-			ModifyCinemaHall(record);
-		else if (selection == "3")//Delete Cinema Hall
-			DeleteCinemaHall(record);
-		else if (selection == "4")//exit
+		if (selection == "1")//Movie management
+			MovieManagement(1);
+		if (selection == "2")//Cinema Hall Modification
+			CinemaHallManagement(2);
+		if (selection == "3")//exit
 			decision = false;
 		else//reinput
 			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
@@ -1737,7 +1717,7 @@ void AddMovie(int& record)
 			if (found == 0)//no movie id found
 				checking = false;
 			else
-				cout << "\t\t\t\tMovie id detected." << endl;
+				cout << "\t\t\t\t\033[1;31mMovie id detected.\033[0m" << endl;
 		} while (checking);
 		cin.ignore();
 		cout << "\t\t\t\tInput the movie name >>> "; //same name allowed(same name,diff. movie
@@ -1755,7 +1735,7 @@ void AddMovie(int& record)
 			if (result)
 				checking = false;
 			else
-				cout << "\t\t\t\tinvalid input" << endl;
+				cout << "\t\t\t\t\033[1;31minvalid input\033[0m" << endl;
 		} while (checking);
 
 		checking = true;
@@ -1765,7 +1745,7 @@ void AddMovie(int& record)
 			int hour = int(movie_length);						//2.00		2
 			double minutes = (movie_length - hour) * 100;		//60		50
 			if (minutes >= 60)
-				cout << "\t\t\t\tinvalid input" << endl;
+				cout << "\t\t\t\t\033[1;31minvalid input\033[0m" << endl;
 			else
 				checking = false;
 		} while (checking);
@@ -1780,7 +1760,9 @@ void AddMovie(int& record)
 					checking = false;
 			}
 			else
-				cout << "\t\t\t\tPlease input again the movie hall" << endl;
+				cout << "\t\t\t\t\033[1;31mPlease input again the movie hall\033[0m" << endl;
+			if (checking)
+				cout << "\t\t\t\t\033[1;31mPlease input again the movie hall\033[0m" << endl;
 		} while (checking);
 		checking = true;
 		do {//display all info
