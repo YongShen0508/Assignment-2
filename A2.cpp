@@ -2976,7 +2976,7 @@ void MenuList(){
 	infile.open("foodAndBeverage.txt");
 	int i = 0;
 	if (infile.is_open()){
-		cout << "\n\t\t\t" << string(130, char(95)) << endl;
+		cout << "\n\t\t\t\033[5;93m" << string(130, char(95)) <<"\033[0m"<< endl;
 		cout << right << setw(100) << "Regular (RM)" << "\t\t" << "Large (RM)" << endl;
 		while (!infile.eof()){
 			getline(infile, FNB[i].foodcode);
@@ -2989,11 +2989,11 @@ void MenuList(){
 			cout <<"\t\t\t\t\t"<< setw(10) << FNB[i].foodcode << setw(30) << FNB[i].foodname << "\t" << setw(10) << FNB[i].regular_price << "\t\t" << setw(8) << FNB[i].large_price << endl;
 			i++;
 		}
-		cout << "\n\n\t\t\t" << string(130, char(95)) << endl;
+		cout << "\n\n\t\t\t\033[5;93m" << string(130, char(95)) <<"\033[0m"<< endl;
 		infile.close();
 	}
 	else{
-		cout << "\t\t\tPlease contact Cinema Admin for further assistance...";
+		cout << "\t\t\t\033[1;31mPlease contact Cinema Admin for further assistance...\033[0m"<<endl;;
 	}
 	cout << "\t\t\t";
 	system("pause");
@@ -3005,14 +3005,15 @@ void inventoryMenu(int option)
 	{
 		cout << "\t\t\t\t\t\t\t\t" << text[9][i] << endl;
 	}
-	cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+	cout << "\n\n\t\t\t\033[5;93m" << string(150, char(95)) << endl;
+	cout<<"\t\t\t"<<string(150, char(95))<<endl;
 	int fbrecord = 0;
 	ReadFBRecord(fbrecord);
 	cout << "\t\t\t" << right << setw(55) << "Regular (RM)" << "\t\t" << "Large (RM)" << "\t\t" << "Available Stock" << endl;
 	for (int i = 0; i < fbrecord; i++)
 	{
 		cout << showpoint << fixed << setprecision(2);
-		cout << "\t\t\t" << setw(10) << FNB[i].foodcode << setw(30) << FNB[i].foodname << "\t" << setw(10) << FNB[i].regular_price << "\t\t" << setw(8) << FNB[i].large_price << setw(10) << FNB[i].stock << endl;
+		cout << "\t\t\t" << setw(10) << FNB[i].foodcode << setw(30) << FNB[i].foodname << "\t" << setw(10) << FNB[i].regular_price << "\t\t" << setw(8) << FNB[i].large_price << setw(15) << FNB[i].stock << endl;
 	}
 }
 void addFB()
@@ -3049,6 +3050,7 @@ void addFB()
 		} while (toupper(more) == 'Y');
 
 		outfile.close();
+		system ("cls");
 		inventoryMenu(0);
 	}
 	else
@@ -3093,8 +3095,11 @@ void deleteFB(int option)
 			found = false;
 		LoadFBRecord(fbrecord);
 	} while (found);
-
+	system ("cls");
 	inventoryMenu(0);
+	system ("pause");
+	system ("cls");
+	FBManagement( );
 }
 void inventoryFB(int option)
 {
@@ -3104,7 +3109,7 @@ void inventoryFB(int option)
 	{
 		cout << "\t\t\t\t\t\t\t\t" << text[8][i] << endl;
 	}
-	cout << "\033[0m\n\n\t\t\t" << string(150, char(95)) << endl;
+	cout << "\033[0m\n\n\t\t\t/033[5;93m" << string(150, char(95)) <<"\033[0m"<< endl;
 	int fbrecord = 0;
 	ReadFBRecord(fbrecord);
 	//let users to select whether to add or delete stock
@@ -3167,7 +3172,8 @@ void FBManagement()
 	{
 		cout << "\t\t\t\t\t\t\t\t" << text[8][i] << endl;
 	}
-	cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
+	cout << "\n\n\t\t\t\033[5;93m" << string(150, char(95)) << endl;
+	cout << "\t\t\t"<<string(150, char(95))<<"\033[0m"<<endl;
 	bool con = true;
 	do {
 		int selection;
@@ -3244,15 +3250,16 @@ void purchaseFB(int option)
 	{
 		cout << "\t\t\t\t\t\t\t\t" << text[11][i] << endl;
 	}
-	cout << "\033[0m\n\n\t\t\t" << string(150, char(95)) << endl;
+	cout << "\033[0m\n\n\t\t\t\033[5;93m" << string(150, char(95)) << endl;
+	cout << "\t\t\t" << string(150, char(95)) <<"\033[0m"<<endl;
 	int fbrecord = 0;
 	ReadFBRecord(fbrecord);
 	string checking = "9999";
 	int nomember = 0;
 	GetSystemTime(&systemTime);
-	cout << "\n\n\n\n\t\t\t" << string(150, char(95)) << endl;
+	cout << "\n\n\n\n\t\t\t\033[5;93m" << string(150, char(95)) <<"\033[0m"<< endl;
 	cout << "\t\t\t" << setw(134) << systemTime.wDay << "/" << systemTime.wMonth << "/" << systemTime.wYear << " " << systemTime.wHour << ":" << systemTime.wMinute << ":" << systemTime.wSecond << endl;
-	cout << "\t\t\t" << string(150, char(95)) << endl;
+	cout << "\t\t\t\033[5;93m" << string(150, char(95)) <<"\033[0m" << endl;
 	for (int i = 0; i < fbrecord; i++)
 	{
 		cout << showpoint << fixed << setprecision(2);
