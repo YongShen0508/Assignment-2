@@ -1355,58 +1355,52 @@ void DeleteCinemaHall(int& record)
 void AddCinemaSeat(int& record)
 {//add unavailable seats
 	int number;
-	char continued;
+	string continued;
 	cout << "\t\t\tInput the number of cinema hall >>>";
 	cin >> number;
-	if (number > 0 && number <= record)
-	{
+	if (number > 0 && number <= record){
 		bool decision = true;
+		cout << "\n\n\t\t\t" << string(100, char(61)) << "\n\n";
+		cout << "\t\t\tCinema hall " << number << endl;
+		CinemaSeatPrinting(number - 1, 99);
 		do {
 			int row, column;
-			number -= 1;
-			CinemaSeatPrinting(number, 99);
 			cout << "\t\t\tInput the row that you want to modify >>>";
 			cin >> row;
 			cout << "\t\t\tInput the column that you want to modify >>>";
 			cin >> column;
-			if (unavailable[number - 1].data > 0)
-			{
+			if (unavailable[number-1].data > 0){
 				int found = 0;
-				for (int i = 0; i < unavailable[number - 1].data; i++)
-				{
-					if (row > 10 || column > 14)
-					{
+				for (int i = 0; i < unavailable[number-1].data; i++){
+					if (row > 10 || column > 14){
 						found++;
 						cout << "\t\t\tplease ensure row and column within the range: 0 < row < 10 and 0 < column < 15" << endl;
 						cout << "\t\t\tPlease reinput row and column" << endl;
 						break;
 					}
-					else if (unavailable[number - 1].row[i] == row && unavailable[number - 1].column[i] == column)
-					{
+					else if (unavailable[number-1].row[i] == row && unavailable[number-1].column[i] == column){
 						found++;
 						cout << "\t\t\tInput have found inside the system..." << endl;
 						cout << "\t\t\tPlease reinput row and column" << endl;
 						break;
 					}
 				}
-				if (found == 0)
-				{
+				if (found == 0){
 					ConfirmAddCinemaSeat(number, row, column);
 				}
 			}
 			else
 				ConfirmAddCinemaSeat(number, row, column);
 			LoadCinemaHallRecord(record);
-			cout << "\t\t\tDo you want to continue <Y>es <N>o >>";
+			cout << "\t\t\tDo you want to continue <Y>es to continue... >>";
 			cin >> continued;
-			continued = toupper(continued);
-			if (continued == 'N')
+			continued = upper(continued);
+			if (continued !="Y")
 				decision = false;
 		} while (decision);
-
 	}
 	else
-		cout << "\t\t\tNo cinema hall found." << endl;
+		cout << "\t\t\tNo cinema hall found."<<endl;
 }
 void DeleteCinemaSeat(int& record)
 {
