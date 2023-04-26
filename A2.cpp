@@ -1184,7 +1184,6 @@ void MembershipManagement() {
 		}
 	} while (decision);
 }
-//Cinema Management
 void CinemaManagement(int option) {
 	cin.clear();
 	string selection;
@@ -1203,7 +1202,7 @@ void CinemaManagement(int option) {
 		if (selection == "3")//exit
 			decision = false;
 		else//reinput
-			cout << "\t\t\tInvalid input found" << endl;
+			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
 	} while (decision);
 }
 //Cinema Hall Management
@@ -1251,7 +1250,7 @@ void CinemaHallManagement(int option) {
 		else if (selection == "4")//exit
 			decision = false;
 		else//reinput
-			cout << "\t\t\tInvalid input detected." << endl;
+			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
 	} while (decision);
 }
 void ReadCinemaHallRecord(int& record){ //read cinema hall and store into struct
@@ -1385,7 +1384,7 @@ bool AddCinemaHall(bool result){// add cinema hall without editing
 	string confirms;
 	bool decision = true;
 	do{
-		cout << "Do you want to add a new cinema hall <Y>es or <N>o >>> ";
+		cout << "\t\t\tDo you want to add a new cinema hall <Y>es or <N>o >>> ";
 		getline(cin, confirms);
 		confirms = upper(confirms);
 		if (confirms == "Y" || confirms == "N")
@@ -1400,6 +1399,7 @@ bool AddCinemaHall(bool result){// add cinema hall without editing
 void ModifyCinemaHall(int& record){//modify seat of cinema
 	string selection;
 	bool decision = true;
+	cin.clear();
 	do {
 		cout << "\t\t\t<1> Add Cinema Unavailable Seat" << endl;
 		cout << "\t\t\t<2> Delete Cinema Unavailable Seat" << endl;
@@ -1408,17 +1408,17 @@ void ModifyCinemaHall(int& record){//modify seat of cinema
 		getline(cin, selection);
 		if (selection == "1")//	Add
 			AddCinemaSeat(record);
-		else if (selection == "4")//Delete
+		else if (selection == "2")//Delete
 			DeleteCinemaSeat(record);
 		else if (selection == "3")//Exit
 			decision = false;
 		else//reinput
-			cout << "\t\t\tInvalid input found" << endl;
+			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
 	} while (decision);
 }
 void DeleteCinemaHall(int& record){//delete entire cinema hall
 	int number;
-	cout << "Please input the cinema hall number >>>";
+	cout << "\t\t\tPlease input the cinema hall number >>>";
 	cin >> number;
 	if (number > 0 && number <= record){
 		for (int i = 0; i < record; i++){//search if cinema hall is valid
@@ -1441,11 +1441,11 @@ void DeleteCinemaHall(int& record){//delete entire cinema hall
 			}
 		}
 		record--;
-		cout << "successfully deleted..." << endl;
+		cout << "\t\t\t\033[1;36msuccessfully deleted...\033[0m" << endl;
 		LoadCinemaHallRecord(record);
-	}
+	} 
 	else
-		cout << "no cinema hall found" << endl;
+		cout << "\t\t\t\033[1; 31mno cinema hall found\033[0m" << endl;
 }
 void AddCinemaSeat(int& record){//add unavailable seats
 	int number;
@@ -1468,14 +1468,14 @@ void AddCinemaSeat(int& record){//add unavailable seats
 				for (int i = 0; i < unavailable[number - 1].data; i++) {//check row and column in struct
 					if (row > 10 || column > 14) {//invalid input
 						found++;
-						cout << "\t\t\tplease ensure row and column within the range: 0 < row < 10 and 0 < column < 15" << endl;
-						cout << "\t\t\tPlease reinput row and column" << endl;
+						cout << "\t\t\t\033[1;31mplease ensure row and column within the range: 0 < row < 10 and 0 < column < 15\033[0m" << endl;
+						cout << "\t\t\t\033[1;31mPlease reinput row and column\033[0m" << endl;
 						break;
 					}
 					else if (unavailable[number - 1].row[i] == row && unavailable[number - 1].column[i] == column) {//row and column found
 						found++;
-						cout << "\t\t\tInput have found inside the system..." << endl;
-						cout << "\t\t\tPlease reinput row and column" << endl;
+						cout << "\t\t\t\033[1;31mInput have found inside the system...\033[0m" << endl;
+						cout << "\t\t\t\033[1;31mPlease reinput row and column\033[0m" << endl;
 						break;
 					}
 				}
@@ -1494,7 +1494,8 @@ void AddCinemaSeat(int& record){//add unavailable seats
 		} while (decision);
 	}
 	else
-		cout << "\t\t\tNo cinema hall found." << endl;
+		cout << "\t\t\t\033[1; 31mno cinema hall found\033[0m" << endl;
+	cin.ignore();
 }
 void DeleteCinemaSeat(int& record){
 	int number;
@@ -1515,7 +1516,7 @@ void DeleteCinemaSeat(int& record){
 			int found = 0;
 			for (int i = 0; i < unavailable[number - 1].data; i++){
 				if (row > 10 || column > 14){
-					cout << "\t\t\tplease ensure row and column within the range: 0 < row < 10 and 0 < column < 15" << endl;
+					cout << "\t\t\t\033[1;31mplease ensure row and column within the range: 0 < row < 10 and 0 < column < 15\033[0m" << endl;
 					break;
 				}
 				else if (unavailable[number - 1].row[i] == row && unavailable[number - 1].column[i] == column){//row and column found
@@ -1536,7 +1537,7 @@ void DeleteCinemaSeat(int& record){
 					}
 					else
 					{
-						cout << "\t\t\tConfirmation Unsuccessful" << endl;
+						cout << "\t\t\t\033[1;31mConfirmation Unsuccessful\033[0m" << endl;
 						cout << "\t\t\tPlease reinput the row and column" << endl;
 					}
 					break;
@@ -1544,7 +1545,7 @@ void DeleteCinemaSeat(int& record){
 
 			}
 			if (found == 0)//no column and row found
-				cout << "\t\t\tNo data found in system" << endl;
+				cout << "\t\t\t\033[1;31mNo data found in system\033[0m" << endl;
 			cout << "\t\t\tDo you want to continue <Y>es <N>o >>";
 			cin >> continued;
 			continued = toupper(continued);
@@ -1553,7 +1554,8 @@ void DeleteCinemaSeat(int& record){
 		} while (decision);
 	}
 	else
-		cout << "\t\t\tno cinema hall seat found" << endl;
+		cout << "\t\t\t\033[1;31mno cinema hall seat found\033[0m" << endl;
+	cin.ignore();
 }
 void ConfirmAddCinemaSeat(int number, int row, int column){
 	char confirms;
