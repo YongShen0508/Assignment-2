@@ -145,7 +145,6 @@ string text[40][7];
 int main() {
 	system("chcp 65001");
 	ReadTextRecord(0);
-	SetConsoleTextAttribute(console, 143);
 	string selection;
 	bool decision = true;
 	do {
@@ -167,8 +166,10 @@ int main() {
 			CustomerFeedback();
 		else if (selection == "7")//exit
 			decision = false;
-		else
-			cout << "\t\t\tInvalid input found" << endl;
+		else {
+			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
+			Sleep(600);
+		}
 		cin.clear();
 	} while (decision);
 	system("pause");
@@ -398,16 +399,19 @@ void AdministratorMenu(int option) {
 		system("cls");
 		ReadTextRecord(0);
 		for (int i = 0; i < 7; i++) {
+			SetConsoleTextAttribute(console, 142);
 			cout << "\t\t\t" << text[1][i] << endl;
+			SetConsoleTextAttribute(console, 143);
 		}
 		string selection;
-		cout << "\n\n\n" << endl;
+		cout << "\n\n\n\t\t\t" << string(150, char(95)) << endl;
 		cout << "\t\t\t<1> Cinema Refreshing" << endl;
 		cout << "\t\t\t<2> Cinema management" << endl;
 		cout << "\t\t\t<3> Food & Beverages management" << endl;
 		cout << "\t\t\t<4> Membership Management" << endl;
 		cout << "\t\t\t<5> Employee management" << endl;
 		cout << "\t\t\t<6> Exit " << endl;
+		cout << "\n\n\t\t\t" << string(150, char(95)) << endl;
 		cout << "\t\t\tPlease input your selection >>> ";
 		getline(cin, selection);
 		if (selection == "1")
@@ -420,12 +424,15 @@ void AdministratorMenu(int option) {
 			MembershipManagement();
 		if (selection == "5")//Employee management
 			EmployeeManagement(5);
-		if (selection == "6")
-			decision = false;
+		if (selection == "6"){
+			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
+			Sleep(600);
+		}
 		else//reinput
 			cout << "\t\t\tInvalid input found" << endl;
 	}
 }
+
 //Open member info files
 void OpenPurchaseHistory() {
 	ifstream Ad_purchase;
@@ -2443,7 +2450,35 @@ void MovieDetails(int option){//print movie info
 	cout << "\t\t\t";
 	system("pause");
 }
+void PurchaseNow(int option){
+	string selection;
+	bool decision = true;
+	do {
+		cin.clear();
+		system("cls");
+		cout << "\n\n" << endl;
+		for (int i = 0; i < 7; i++) {
+			cout << "\t\t\t\t\t" << text[7][i] << endl;
+		}
+		cout << "\n\t\t\t\t" << string(150, char(95)) << endl;
+		cout << "\t\t\t\t<1> Book a movie UwU " << endl;
+		cout << "\t\t\t\t<2> Food & Beverages UnU" << endl;
+		cout << "\t\t\t\t<3> Exit " << "\n\t\t\t\t" << string(150, char(95)) << endl;
+		cout << "\n\t\t\t\tInput your selection >>> ";
+		getline(cin, selection);
+		if (selection == "1")//book  movie
+			BookMovie(1);
+		else if (selection == "2")//purchase FB
+			purchaseFB(2);
+		else if (selection == "3")
+			decision = false;
+		else{
+			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
+			Sleep(600);
+		}
+	} while (decision);
 
+}
 void BookMovie(int option)
 {
 	bool decision = true, validated = true;
