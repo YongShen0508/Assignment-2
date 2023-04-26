@@ -97,7 +97,7 @@ void inventoryFB(int); //function to add stock or delete stock
 void FBManagement(); //add new item, delete item, add and reduce stock
 //purchase fnb
 void purchaseFB(int); //function to purchase fnb
-void UpdateHistory(int&, int&) {
+void UpdateHistory(int&, int&);
 void MenuList();
 void ReadFBRecord(int&); //read txt file
 void LoadFBRecord(int&); //update txt file
