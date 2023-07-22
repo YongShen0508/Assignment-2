@@ -426,11 +426,13 @@ void AdministratorMenu(int option) {
 		else if (selection == "5")//Employee management
 			EmployeeManagement(5);
 		else if (selection == "6") {
-			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
-			Sleep(600);
+			decision=false;
 		}
 		else//reinput
-			cout << "\t\t\tInvalid input found" << endl;
+		{	cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
+			Sleep(600);
+
+		}
 	}
 }
 //Open member info files
