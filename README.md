@@ -1,9 +1,9 @@
-# Assignment-2 Cinema Ticketing system
-This assignment done by a group of 3 students from University Tunku Abdul Rahmen
+# PCP assignment 2 --> Cinema Ticketing system
+This assignment done by a group of 3 students from UTAR
 
-### This is our first release of assginment 2 !!!
+### This is our first release of Assignment 2 !!!
 
-In our assignment was included several function to users
+In our assignment included several functions for users
 ## (1)purchase movie and food & beverages
 ## (2)membership for members
 ## (3)administrator menu 
