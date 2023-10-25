@@ -1205,9 +1205,9 @@ void CinemaManagement(int option) {
 		getline(cin, selection);
 		if (selection == "1")//Movie management
 			MovieManagement(1);
-		if (selection == "2")//Cinema Hall Modification
+		else if (selection == "2")//Cinema Hall Modification
 			CinemaHallManagement(2);
-		if (selection == "3")//exit
+		else if (selection == "3")//exit
 			decision = false;
 		else//reinput
 			cout << "\t\t\t\033[1;31mInvalid input detected\033[0m" << endl;
