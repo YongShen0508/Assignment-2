@@ -13,4 +13,9 @@ In our assignment included several functions for users
       (d)employee management
 
 
-## Screenshot of our application 😜
+## Screenshot of our system 😜
+
+
+<p align="center">
+![image](https://github.com/YongShen0508/PCP_A2/assets/96345247/28c643a1-372f-494c-a5c1-d4fdf1fa066b)
+</p>p>
