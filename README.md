@@ -11,3 +11,6 @@ In our assignment included several functions for users
       (b)F&B management
       (c)membership management
       (d)employee management
+
+
+## Screenshot of our application 😜
